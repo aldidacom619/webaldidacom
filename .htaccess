@@ -2,5 +2,5 @@
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ /admin/index.php/$1 [L]
+    RewriteRule ^(.*)$ /contabilidad/index.php/$1 [L]
 </IfModule>
