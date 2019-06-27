@@ -28,5 +28,9 @@ class Inicio extends CI_Controller
 		$this->load->view("Inicio/cuerpo");		
 		$this->load->view("Inicio/pie");
 	}
+	function prueba()
+	{
+		
+	}
 }
 ?>
