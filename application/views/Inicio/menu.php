@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" style="margin-bottom: 0;background: #FE2E2E;color:#FFFFFF;"href="">ALDIDACOM v1.0 - Sistema Administador</a>
+        <a class="navbar-brand" style="margin-bottom: 0;background: #FE2E2E;color:#FFFFFF;"href="">ALDIDACOM v1.0 - Sistema Contable</a>
 
     </div>
     <!-- /.navbar-header -->

@@ -30,7 +30,7 @@ class Inicio extends CI_Controller
 	}
 	function prueba()
 	{
-		
+		echo "prueba uno";
 	}
 }
 ?>
