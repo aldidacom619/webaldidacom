@@ -12,14 +12,14 @@ class Usuarios extends CI_Controller
 		
 	}
 
-	function index($mensaje = "prueba")
+	function index($mensaje = "")
 	{	
 		$dato['error'] =$mensaje;
 		$this->load->view("Usuario/logued",$dato);        
 	}
 	function logued() 
 	{	
-		$username = $this->input->post('username');
+		$username = strtoupper($this->input->post('username'));
 		$password =  md5("aldidacom".($this->input->post('pass')));
 		//echo $username." - ".$password;
 		$login = $this->usuarios_model->loguear($username, $password);
@@ -54,13 +54,12 @@ class Usuarios extends CI_Controller
 			}
 			else
 			{
-					$mensaje ="El usuario no se encuentra habilitado contactece con el administrador";
-					$this->index($mensaje);
+				$mensaje ="El usuario no se encuentra habilitado contactece con el administrador";
+				$this->index($mensaje);
 			}		
 		}		
 		else 
 		{
-			//echo "EL NOMBRE O CONTRASEÑA INCORRECTO";
 			$this->index('EL NOMBRE O CONTRASEÑA INCORRECTO');
 		}	
 	}

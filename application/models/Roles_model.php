@@ -32,6 +32,15 @@ class Roles_model extends CI_Model
 									order by o.codad_opcion,o.nivel,o.orden asc" );	
         return $query->result();	
 	}
+	function verificar_rol($iduser,$codopcion)
+	{
+		$query = $this->db->query("select id
+									 from ad_opciones_usuarios u
+									where u.idad_usuario = ".$iduser."
+									  and u.codad_opcion = ".$codopcion."
+									  and u.estado = 'AC'");	
+        return $query->result();
+	}
 
 }
 ?>

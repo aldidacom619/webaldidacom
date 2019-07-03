@@ -1,12 +1,13 @@
 <?php
 
-class Inicio extends CI_Controller
+class Modificar_egresos extends CI_Controller
 {
 	function __construct(){
 		parent::__construct();	
 		$this->_is_logued_in();	
 		$this->load->model('roles_model');
 		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
 		$this->load->helper('Menu_helper');
 	}
 	function _is_logued_in()
@@ -30,9 +31,6 @@ class Inicio extends CI_Controller
 		//$this->load->view("Inicio/cuerpo");		
 		$this->load->view("Inicio/pie");
 	}
-	function prueba()
-	{
-		echo "prueba uno";
-	}
+	
 }
 ?>

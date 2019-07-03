@@ -32,10 +32,10 @@
                         </span>
                     </div>                    
                 </li>
-                
+           
                 <? foreach($rolescero as $rol):?>
                     <li>
-                      <a href="<?php echo site_url($rol->link);?>"><i class="fa fa-dashboard fa-fw"></i><?=$rol->opcion?></a>
+                      <a href="index.html"><i class="fa fa-dashboard fa-fw"></i><?=$rol->opcion?></a>
                     </li>
                 <?endforeach?> 
                <? $nivelanterior = 0;  ?>
@@ -52,7 +52,7 @@
                     <?}?>
                     <? if ($rol->nivel == 2){?>
                         <li>
-                            <a href="<?php echo site_url($rol->link);?>"><?=$rol->opcion?></a>
+                            <a href="<?php echo site_url('Registrar_ingresos');?>"><?=$rol->opcion?></a>
                         </li>
                     <?}?>
                     <? $nivelanterior = $rol->nivel;  ?>
