@@ -11,7 +11,7 @@ INSERT INTO `ad_opciones_usuarios` (`id`, `idad_usuario`, `codad_opcion`, `idad_
 
 
 INSERT INTO `ad_opciones_usuarios` (`id`, `idad_usuario`, `codad_opcion`, `idad_logs`, `estado`) VALUES
-(25, 10, 11, 11, 'AC');
+(30, 10, 11, 11, 'AC');
 
 
 

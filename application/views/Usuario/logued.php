@@ -62,8 +62,14 @@
       
       <?= form_close()?> 
 
-       <? if ($error != ""){?> <div class="panel-body"><div class="alert alert-danger"><?= $error?></div></div><?}?>
+      
 
+        <?php 
+        if ($error != "")
+        { 
+          echo "<div class='panel-body'><div class='alert alert-danger'>".$error."</div></div>";
+        }
+        ?>
       
       <div class="forget">
         <a href="">

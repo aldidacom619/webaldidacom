@@ -1,4 +1,4 @@
- <?php
+<?php
 
 class Eliminar_ingresos extends CI_Controller
 {

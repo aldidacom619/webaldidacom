@@ -1,4 +1,4 @@
- <?php
+<?php
 
 class Modificar_ingresos extends CI_Controller
 {

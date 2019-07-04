@@ -1,4 +1,4 @@
- <?php
+<?php
 
 class Eliminar_egresos extends CI_Controller
 {
