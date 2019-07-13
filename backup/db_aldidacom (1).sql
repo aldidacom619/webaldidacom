@@ -112,14 +112,14 @@ CREATE TABLE IF NOT EXISTS `ad_opciones` (
 -- Volcado de datos para la tabla `ad_opciones`
 --
 
-INSERT INTO `ad_opciones` (`codigo`, `codad_aplicacion`, `codad_opcion`, `opcion`, `descripcion`, `link`, `nivel`, `orden`, `estado`) VALUES
-(8, 8, 8, 'APLICACIONES', '', '', 1, 0, 'AC'),
-(9, 8, 8, 'REGISTRO APLICACIÓN', '', 'DDDDDD', 2, 1, 'AC'),
-(10, 8, 8, 'MODIFICAR APLICACIÓN', '', 'DDDDD', 2, 2, 'AC'),
-(11, 8, 11, 'INICIO', 'INCIO', '', 0, 1, 'AC'),
-(12, 8, 12, 'USUARIOS', '', '', 1, 1, 'AC'),
-(13, 8, 12, 'REGISTRO USUARIO', '', '', 2, 1, 'AC'),
-(14, 8, 8, 'CONTROL PAGOS', '', '', 2, 3, 'AC');
+INSERT INTO `ad_opciones` (`codigo`, `codad_modulo`, `codad_opcion`, `opcion`, `descripcion`, `link`, `nivel`, `orden`, `estado`) VALUES
+(8, 11, 8, 'APLICACIONES', '', '', 1, 0, 'AC'),
+(9, 11, 8, 'REGISTRO APLICACIÓN', '', 'DDDDDD', 2, 1, 'AC'),
+(10, 11, 8, 'MODIFICAR APLICACIÓN', '', 'DDDDD', 2, 2, 'AC'),
+(11, 12, 11, 'INICIO', 'INCIO', '', 0, 1, 'AC'),
+(12, 10, 12, 'USUARIOS', '', '', 1, 1, 'AC'),
+(13, 10, 12, 'REGISTRO USUARIO', '', '', 2, 1, 'AC'),
+(14, 13, 8, 'CONTROL PAGOS', '', '', 2, 3, 'AC');
 
 -- --------------------------------------------------------
 

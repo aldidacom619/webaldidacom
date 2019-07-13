@@ -75,13 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'www.aldidacom.com',
 	//'username' => 'root',
-	'username' => 'id9969591_aldidacomuser',
+	'username' => 'aldidacom_aldidacom_db',
 	//'password' => '',
-	'password' => 'gonzo1982**',	
+	'password' => 'a1b2c31982*1982',	
 	//'database' => 'db_aldidacom',
-	'database' => 'id9969591_basealdidacom',
+	'database' => 'aldidacom_aldidacom',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

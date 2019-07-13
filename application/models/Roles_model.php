@@ -18,6 +18,7 @@ class Roles_model extends CI_Model
 									where u.idad_usuario = ".$id."
 									  and o.codigo = u.codad_opcion
 									  and o.nivel = 0
+									  and u.estado = 'AC'
 									order by o.orden asc" );	
         return $query->result();	
 	}
@@ -29,6 +30,7 @@ class Roles_model extends CI_Model
 									where u.idad_usuario = ".$id."
 									  and o.codigo = u.codad_opcion
 									  and o.nivel > 0
+									  and u.estado = 'AC'
 									order by o.codad_opcion,o.nivel,o.orden asc" );	
         return $query->result();	
 	}

@@ -12,8 +12,7 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="<?php echo  base_url() ?>recursos/login/bootstrap.min.css">
-  <!-- icheck -->
-  <link rel="stylesheet" href="<?php echo  base_url() ?>recursos/login/all.css">
+
   <!-- Theme CSS -->
   <link rel="stylesheet" href="<?php echo  base_url() ?>recursos/login/style.css">
   <!-- Color CSS -->
@@ -32,7 +31,7 @@
   <script src="<?php echo  base_url() ?>recursos/login/jquery.icheck.min.js"></script>
   <!-- Bootstrap -->
   <script src="<?php echo  base_url() ?>recursos/login/bootstrap.min.js"></script>
-  <script src="<?php echo  base_url() ?>recursos/login/eakroko.js"></script>
+  
   
 
 </head>
@@ -40,7 +39,7 @@
 <body class="login" cz-shortcut-listen="true">
   <div class="wrapper">
     <h1>
-      <a href="http://www.eakroko.de/flat/index.html">
+      <a href="#">
         <img src="<?php echo  base_url() ?>recursos/login/aldidacom2.png" alt="" class="retina-ready" width="59" height="49">ALDIDACOM</a>
     </h1>
     <div class="login-body">
@@ -62,14 +61,14 @@
       
       <?= form_close()?> 
 
+      <? if ($error != "")
+       {?>
+         <div class='panel-body'><div class='alert alert-danger'>
+          <?= $error?> &times;
+          </div></div>
+       <?}
       
-
-        <?php 
-        if ($error != "")
-        { 
-          echo "<div class='panel-body'><div class='alert alert-danger'>".$error."</div></div>";
-        }
-        ?>
+      ?>
       
       <div class="forget">
         <a href="">

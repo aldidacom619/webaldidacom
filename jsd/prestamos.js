@@ -30,7 +30,7 @@ function validacionformularioprestamo()
 
   	$('#montoprestamo').keyup(function () 
   	{
-      var tem = $('#montoprestamo').val(); 
+      var tem = $('#montoprestamo').val();  
       var RE = /^\d*\.?\d*$/;
       if (RE.test(tem)) 
       {

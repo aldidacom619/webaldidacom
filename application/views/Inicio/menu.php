@@ -32,34 +32,37 @@
                         </span>
                     </div>                    
                 </li>
-                
-            <?php foreach($rolescero as $rol):                   
-                     echo"<li><li><a href='".$rol->link."'><i class='fa fa-dashboard fa-fw'></i>".$rol->opcion."</a></li>";
-                  endforeach; 
-                    $nivelanterior = 0;  
-                    foreach($roles as $rol):
-                      if ($rol->nivel== 1)
-                      {
-                        if ($nivelanterior == 2)
-                        { echo "</ul></li>";
-                            
-                        }
-                        echo "<li><li><a href='#'><i class='fa fa-bar-chart-o fa-fw'></i>".$rol->opcion."<span class='fa arrow'></span></a><ul class='nav nav-second-level'>";
-                    }
-                    if ($rol->nivel == 2){
-                       //echo "<li><a href='site_url(".$rol->link."')><".$rol->opcion."</a></li>";
-                       //echo "--".$rol->link."--".$rol->opcion."***";
-                       //echo "<li><li><a href='#'><i class='fa fa-bar-chart-o fa-fw'></i>".$rol->opcion."<span class='fa arrow'></span></a><ul class='nav nav-second-level'>";
-                       
-                        echo"<li><li><a href='".$rol->link."'>".$rol->opcion."</a></li>";
-                    }
-                    $nivelanterior = $rol->nivel;  
-                endforeach;
-                if ($nivelanterior == 2){
-                  echo "</ul></li>";
-                }     
-            echo "</ul></div>";
-            ?>
+           
+                <? foreach($rolescero as $rol):?>
+                    <li>
+                      <a href="index.html"><i class="fa fa-dashboard fa-fw"></i><?=$rol->opcion?></a>
+                    </li>
+                <?endforeach?> 
+               <? $nivelanterior = 0;  ?>
+                <? foreach($roles as $rol):?>
+                    <? if ($rol->nivel== 1){?>
+                        <? if ($nivelanterior == 2){?>
+                            </ul>
+                          </li>
+                        <?}?>      
+                        <li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i><?=$rol->opcion?><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">                                                      
+                    <?}?>
+                    <? if ($rol->nivel == 2){?>
+                        <li>
+                            <a href="<?php echo site_url($rol->link);?>"><?=$rol->opcion?></a>
+                        </li>
+                    <?}?>
+                    <? $nivelanterior = $rol->nivel;  ?>
+                <?endforeach?>         
+                <? if ($nivelanterior == 2){?>
+                    </ul>
+                  </li>
+                <?}?>     
+            </ul>
+        </div>
         
     </div>
     <!-- /.navbar-static-side -->

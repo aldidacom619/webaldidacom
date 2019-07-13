@@ -12,7 +12,7 @@ function validacionformulariopersona()
   var sexo = '<option VALUE="-1">Seleccionar opcion</OPTION><option VALUE="MASCULINO">MASCULINO</OPTION><option VALUE="FEMENINO">FEMENINO</OPTION>';
   $('#sexo').html(sexo);
 
-
+ 
   $('#ci').keyup(function () 
   {
     var tem = $('#ci').val();
