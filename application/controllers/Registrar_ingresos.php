@@ -84,7 +84,7 @@ class Registrar_ingresos extends CI_Controller
 		}
 	}
 
-	function getcuentas(Type $var = null)
+	function getcuentas(Type $var = null) 
 	{
 		$filas = $this->ingresos_model->getcuentas_tabla();
 		$option = "<option VALUE='-1'>Seleccionar cuenta</OPTION>";
