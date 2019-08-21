@@ -149,7 +149,6 @@ function reg_debe(id)
     var enlace = base_url + "Registrar_ingresos/registrar_debe/"+id;
     location.href = enlace;    
 }
-
 function nuevaegreso_ingreso()
 {
   $('#accion').val('nuevo');
@@ -199,4 +198,8 @@ function validardatos()
   }
   return todook;
 } 
-
+function imprimir_ingreso(id)
+{
+    var enlace = base_url + "reportesingresos/comprobante/"+id;
+    window.open(enlace); 
+}

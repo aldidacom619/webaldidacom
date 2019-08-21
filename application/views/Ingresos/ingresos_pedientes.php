@@ -31,6 +31,7 @@
                                     <thead>
                                         <tr>
                                         <th>Opciones</th>
+                                            <th>Numero Ingreso</th>
                                             <th>Cuenta Ingreso</th>
                                             <th>Beneficiario</th>
                                             <th>Fecha</th>
@@ -47,9 +48,10 @@
                                                 <button class="btn btn-primary" onclick='reg_debe(<?= $fila->id?>)'>Reg. Debe</button>
                                             <?}else {?>
                                                 <button class="btn btn-primary" onclick='reg_debe(<?= $fila->id?>)'>Reg. Debe</button><br>
-                                                <button class="btn btn-primary" onclick='editarusuario(<?= $fila->id_user?>)'>Imprimir</button>
+                                                <button class="btn btn-primary" onclick='imprimir_ingreso(<?= $fila->id?>)'>Imprimir</button>
                                             <?}?> 
 						          	    </td>
+                                            <td ><?= $fila->correlativo?></td>
                                             <td ><?= cuentas_denominacion($fila->cuenta_1)?><br><?= cuentas_denominacion($fila->cuenta_2)?></td>
                                             <td ><?= beneficiarios_helpers($fila->idcb_beneficiario)?></td>
                                             <td ><?= $fila->fecha?></td>

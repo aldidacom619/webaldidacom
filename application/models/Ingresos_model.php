@@ -13,7 +13,9 @@ class Ingresos_model extends CI_Model
 	{
 		$query = $this->db->query("select *
 									 from cb_ingresos_egresos i
-									where i.estado IN ('PE','LI')");	
+									where i.tipo_transaccion = 'IN'
+									  and i.estado IN ('PE','LI')
+								   order by i.correlativo asc");	
         return $query->result();
 	}
 	function ingresos_id($id)
@@ -27,7 +29,7 @@ class Ingresos_model extends CI_Model
 	{
 		$query = $this->db->query("select *
 									 from cb_ingresos_egresos i
-									where i.idcb_ingreso =". $id."
+									where i.idcb_ingreso_egreso =". $id."
 									  and i.estado = 'AC'");	
         return $query->result();
 	}
@@ -69,13 +71,13 @@ class Ingresos_model extends CI_Model
 															where i.id =".$ingreso.")
 									  and c.codigo not in (select ie.cuenta_2 
 															 from cb_ingresos_egresos ie
-															where ie.idcb_ingreso =".$ingreso.")");	
+															where ie.idcb_ingreso_egreso =".$ingreso.")");	
         return $query->result();
 	}	
 	function insert_ingresos_egresos($idcb_ingreso,$correlativo,$cuenta_1,$cuenta_2,$monto,$fecha,$tipo_cambio,$documento_respaldo,$numero_cheque,$idcb_beneficiario,$descripcion_transaccion,$tipo_transaccion,$idad_logs,$cantidad_cuentas_egreso,$saldo_debe,$estado)
 	{
 		$data = array(
-			'idcb_ingreso' => $idcb_ingreso,
+			'idcb_ingreso_egreso' => $idcb_ingreso,
 			'correlativo' => $correlativo,
 			'cuenta_1' => $cuenta_1,
 			'cuenta_2' => $cuenta_2,
@@ -104,6 +106,25 @@ class Ingresos_model extends CI_Model
 		  );
 		 $this->db->where('id',$id);
 		 return  $this->db->update('cb_ingresos_egresos',$data);
+	}
+	function obtenercorrelativo()
+	{
+		$query = $this->db->query("select max(i.correlativo)as maximo
+									 from cb_ingresos_egresos i");	
+        return $query->result();
+	}
+	function insert_logs($usuario,$codigo)
+	{
+		$datestring = " %Y-%m-%d %H:%i:%s";
+        $time = time(); 
+        $fecha =  mdate($datestring, $time);
+		$data = array(
+			'idad_usuario' => $usuario,
+			'codad_accion' => $codigo,
+			'fecha' => $fecha			
+		 );
+		$this->db->insert('ad_logs',$data);
+		return $this->db->insert_id();
 	}
 
 

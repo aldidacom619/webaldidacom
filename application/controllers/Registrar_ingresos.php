@@ -11,6 +11,8 @@ class Registrar_ingresos extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->helper('Menu_helper');
 		$this->load->helper('cuentas_helper');
+		$this->load->helper('date');
+
 	}
 	function _is_logued_in()
 	{
@@ -105,15 +107,17 @@ class Registrar_ingresos extends CI_Controller
 		}
 		echo $option;
 	}
+	
 	function guardaringresos()
 	{
 		if(1 == 1)
 		{	
 			if($this->input->get('accion')=='nuevo')  
 			{	
-				$tipo_transaccion = 'IN';			
-				$correlativo = 2;
-				$log = 11;
+				$tipo_transaccion = 'IN';	
+				$correl = $this->ingresos_model->obtenercorrelativo();
+				$correlativo = $correl[0]->maximo + 1;
+				$log = $this->ingresos_model->insert_logs($id_usu = $this->session->userdata('id'),11);
 				$beneficiario = 2;
 				$ingreso = $this->ingresos_model->insert_ingresos_egresos(0,$correlativo,$this->input->get('cuenta'),$this->input->get('sub_cuenta'),$this->input->get('monto'),$this->input->get('fecha'),$this->input->get('tipocambio'),$this->input->get('docrespaldo'),'',$beneficiario,$this->input->get('descripcioningreso'),$tipo_transaccion,$log,0,$this->input->get('monto'),'PE');
 				if($ingreso > 0)
@@ -127,8 +131,7 @@ class Registrar_ingresos extends CI_Controller
 			}
 		}
 		else
-		{
-		
+		{		
 			redirect("inicio");
 		}
 	}
@@ -164,8 +167,9 @@ class Registrar_ingresos extends CI_Controller
 			$ingreso = $this->ingresos_model->ingresos_id($this->input->get('id_ingreso'));
 			if($this->input->get('accion')=='nuevo')  
 			{	
-				$tipo_transaccion = 'EG';			
-				$registro_ingreso = $this->ingresos_model->insert_ingresos_egresos($this->input->get('id_ingreso'),0,$this->input->get('cuentae'),$this->input->get('sub_cuentae'),$this->input->get('monto_egreso'),$ingreso[0]->fecha,$ingreso[0]->tipo_cambio,$ingreso[0]->documento_respaldo,$ingreso[0]->numero_cheque,$ingreso[0]->idcb_beneficiario,$ingreso[0]->descripcion_transaccion,$tipo_transaccion,$ingreso[0]->idad_logs,0,0,'AC');
+				$log = $this->ingresos_model->insert_logs($id_usu = $this->session->userdata('id'),12);
+				$tipo_transaccion = 'EG-IN';			
+				$registro_ingreso = $this->ingresos_model->insert_ingresos_egresos($this->input->get('id_ingreso'),0,$this->input->get('cuentae'),$this->input->get('sub_cuentae'),$this->input->get('monto_egreso'),$ingreso[0]->fecha,$ingreso[0]->tipo_cambio,$ingreso[0]->documento_respaldo,$ingreso[0]->numero_cheque,$ingreso[0]->idcb_beneficiario,$ingreso[0]->descripcion_transaccion,$tipo_transaccion,$log,0,0,'AC');
 				if($registro_ingreso > 0)
 				{
 					$saldo = $ingreso[0]->saldo_debe - $this->input->get('monto_egreso');
@@ -195,6 +199,7 @@ class Registrar_ingresos extends CI_Controller
 			redirect("inicio");
 		}
 	}
+	
 
 	
 }
