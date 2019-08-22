@@ -1,10 +1,10 @@
-<script type="text/javascript" src="<?php echo  base_url() ?>jsd/ingresos.js"></script>
+<script type="text/javascript" src="<?php echo  base_url() ?>jsd/egresos.js"></script>
 <div id="page-wrapper">
 <!-- /#INICIA CUERPO -->
 
     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Registro de Ingresos</h1>
+                    <h1 class="page-header">Registro de Egresos</h1>
                 </div>
                 <!-- /.col-lg-12 -->
     </div>
@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="alert alert-success">
                 <strong>OPCIONES:</strong>                
-                    <button class="btn btn-primary" onclick='nuevo_ingreso()'>NUEVO INGRESO</button>                  
+                    <button class="btn btn-primary" onclick='nuevo_egreso()'>NUEVO EGRESO</button>                  
                              
             </div> 
         </div>
@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Ingresos Pendientes
+                            Egresos Pendientes
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -42,7 +42,7 @@
                                     </thead>
                                     <tbody>
                                         <? $n = 1?>
-                                        <? foreach($ingresos as $fila):?>
+                                        <? foreach($egresos as $fila):?>
                                         <tr>
                                             <td ><?= $n?></td>                                      
                                             <td ><?= $fila->correlativo?></td>

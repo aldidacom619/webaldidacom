@@ -100,9 +100,9 @@ function cerrarmodal()
 {
   window.setTimeout('location.reload()', 500);
 }
-function nuevo_ingreso()
+function nuevo_egreso()
 {
-    var enlace = base_url + "Registrar_ingresos/nuevo_ingreso";
+    var enlace = base_url + "Registrar_egresos/nuevo_egreso";
     location.href = enlace;    
 }
 function guardaringreso()

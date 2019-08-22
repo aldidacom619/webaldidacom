@@ -2,18 +2,18 @@
 /*
 */
 
-class Ingresos_model extends CI_Model
+class Egresos_model extends CI_Model
 {
 	
 	function __construct()
 	{
 		parent::__construct();		
 	}
-	function ingresos_pedientes()
+	function egresos_pedientes()
 	{
 		$query = $this->db->query("select *
 									 from cb_ingresos_egresos i
-									where i.tipo_transaccion = 'IN'
+									where i.tipo_transaccion = 'EG'
 									  and i.estado IN ('PE','LI')
 								   order by i.id asc");	
         return $query->result();

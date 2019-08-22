@@ -4,7 +4,7 @@
 
     <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Registro de Ingresos</h1>
+                    <h1 class="page-header">Registro de Egreso</h1>
                 </div>
         
                 <!-- /.col-lg-12 -->
@@ -15,7 +15,7 @@
        
                    <form id="formularioingreso">
                      <div class="row"> 
-                       <legend>Datos de Ingreso</legend>
+                       <legend>Datos de Egreso</legend>
                         <div  class="alert alert-danger"  id="validarprestamo" style="display: none;">
                                         </div>
                          <input type="hidden" class="form-control" id="accion" name="accion" value="nuevo" required="required">
