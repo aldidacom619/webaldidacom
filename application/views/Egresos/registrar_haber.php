@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo  base_url() ?>jsd/ingresos.js"></script>
+<script type="text/javascript" src="<?php echo  base_url() ?>jsd/egresos.js"></script>
 <div id="page-wrapper">
 <!-- /#INICIA CUERPO -->
 
@@ -27,7 +27,7 @@
             <div class="alert alert-success">
                 <strong>OPCIONES:</strong>
                 <?if($ingresos[0]->saldo_debe > 0){?>  
-                    <button class="btn btn-primary" onclick='nuevaegreso_ingreso()'>NUEVO</button>                  
+                    <button class="btn btn-primary" onclick='nuevaegreso_debe()'>NUEVO</button>                  
                 <?}?>                
             </div> 
         </div>
@@ -108,20 +108,21 @@
                           <input type="hidden" class="form-control" id="cuenta_2" name="cuenta_2" value="<?= $ingresos[0]->cuenta_2?>" required="required">
 			              <input type="hidden" class="form-control" id="montoingreso" name="montoingreso" value="<?= $ingresos[0]->monto?>" required="required">
                           <input type="hidden" class="form-control" id="saldoegreso" name="saldoegreso" value="<?= $suma?>" required="required">
-			           
 			            <div class="col-lg-12">
 			              <div class="form-group">
 			                <label> CUENTA</label>
 			                <SELECT NAME="cuentae" id = "cuentae" class="form-control" required="required">
-			                  
 			                </SELECT> 
 			              </div>
 			               <div class="form-group">
 			                <label> SUB CUENTA</label>
 			                <SELECT NAME="sub_cuentae" id = "sub_cuentae" class="form-control" required="required">
-			                  
 			                </SELECT> 
 			              </div>
+                          <div class="form-group">
+                                <label>NUMERO DE CHEQUE</label>
+                                <input class="form-control" id="cheque" name="cheque" required="required">
+                          </div>
 			              <div class="form-group">
 			                    <label>MONTO DE EGRESO</label>
 			                    <input class="form-control" id="monto_egreso" name="monto_egreso" required="required">
@@ -132,13 +133,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick='cerrarmodal()'><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick='guardaregreso()'><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+                    <button type="button" class="btn btn-primary" onclick='guardaregresodebe()'><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                 </div>
             </div>
         </div>
-    </div>
-        
-            
+    </div>  
 <!-- /#FIN CUERPO -->
 </div>
 <!-- /#page-wrapper -->

@@ -108,13 +108,13 @@ class Registrar_egresos extends CI_Controller
 		echo $option;
 	}
 	
-	function guardaringresos()
+	function guardaregresos()
 	{
 		if(1 == 1)
 		{	
 			if($this->input->get('accion')=='nuevo')  
 			{	
-				$tipo_transaccion = 'IN';	
+				$tipo_transaccion = 'EG';	
 				$correl = $this->ingresos_model->obtenercorrelativo();
 				$correlativo = $correl[0]->maximo + 1;
 				$log = $this->ingresos_model->insert_logs($id_usu = $this->session->userdata('id'),11);
@@ -160,15 +160,16 @@ class Registrar_egresos extends CI_Controller
 		}
 		echo $option;
 	}
-	function guardaregreso()
+	function guardaregresodebe()
 	{
 		if(1 == 1)
 		{	
 			$ingreso = $this->ingresos_model->ingresos_id($this->input->get('id_ingreso'));
 			if($this->input->get('accion')=='nuevo')  
 			{	
-				$log = $this->ingresos_model->insert_logs($id_usu = $this->session->userdata('id'),12);
-				$tipo_transaccion = 'IN-CU';			
+				$log = $this->ingresos_model->insert_logs($this->session->userdata('id'),12);
+				$tipo_transaccion = 'EG-CU
+				';			
 				$registro_ingreso = $this->ingresos_model->insert_ingresos_egresos($this->input->get('id_ingreso'),0,$this->input->get('cuentae'),$this->input->get('sub_cuentae'),$this->input->get('monto_egreso'),$ingreso[0]->fecha,$ingreso[0]->tipo_cambio,$ingreso[0]->documento_respaldo,$ingreso[0]->numero_cheque,$ingreso[0]->idcb_beneficiario,$ingreso[0]->descripcion_transaccion,$tipo_transaccion,$log,0,0,'AC');
 				if($registro_ingreso > 0)
 				{
@@ -183,9 +184,7 @@ class Registrar_egresos extends CI_Controller
 						$estado = 'PE';
 					}
 					$ingreso = $this->ingresos_model->actualizarsaldoestado($this->input->get('id_ingreso'),$saldo,$cantidad,$estado);
-
 				}
-
 				echo "SE REALIZO EL REGISTRO CORRECTAMENTE";
 			}
 			else
@@ -197,6 +196,16 @@ class Registrar_egresos extends CI_Controller
 		{		
 			redirect("inicio");
 		}
+	}
+	function disponibilidad()
+	{
+		$id_ingreso = $this->input->get('cue');		
+		$ingre = $this->egresos_model->get_ingreso_subcuenta_id($id_ingreso);
+		$egre = $this->egresos_model->get_egreso_subcuenta_id($id_ingreso);
+		$ingreso = $ingre[0]->ingreso;
+		$egreso = $egre[0]->egreso;
+		
+		echo $ingreso-$egreso;		
 	}
 	
 

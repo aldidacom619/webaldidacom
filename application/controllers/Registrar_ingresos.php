@@ -160,7 +160,7 @@ class Registrar_ingresos extends CI_Controller
 		}
 		echo $option;
 	}
-	function guardaregreso()
+	function guardaringresohaber()
 	{
 		if(1 == 1)
 		{	

@@ -31,7 +31,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>C orrelativo</th>
+                                            <th>Correlativo</th>
                                             <th>Cuenta Ingreso</th>
                                             <th>Beneficiario</th>
                                             <th>Fecha</th>

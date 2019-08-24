@@ -9,15 +9,12 @@
         
                 <!-- /.col-lg-12 -->
     </div> 
-    <div class="panel panel-default">
-	           
-               <div class="modal-body">
-       
+    <div class="panel panel-default">	           
+               <div class="modal-body">       
                    <form id="formularioingreso">
                      <div class="row"> 
                        <legend>Datos de Ingreso</legend>
-                        <div  class="alert alert-danger"  id="validarprestamo" style="display: none;">
-                                        </div>
+                        <div  class="alert alert-danger"  id="validaringreso" style="display: none;"></div>
                          <input type="hidden" class="form-control" id="accion" name="accion" value="nuevo" required="required">
                          <input type="hidden" class="form-control" id="id_ingreso" name="id_ingreso" required="required">
                          <div class="col-lg-4">

@@ -123,7 +123,7 @@
 			                </SELECT> 
 			              </div>
 			              <div class="form-group">
-			                    <label>MONTO DE EGRESO</label>
+			                    <label>MONTO DE INGRESO</label>
 			                    <input class="form-control" id="monto_egreso" name="monto_egreso" required="required">
 			                </div>
 			            </div>			            
@@ -132,7 +132,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick='cerrarmodal()'><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick='guardaregreso()'><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+                    <button type="button" class="btn btn-primary" onclick='guardaringresohaber()'><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                 </div>
             </div>
         </div>

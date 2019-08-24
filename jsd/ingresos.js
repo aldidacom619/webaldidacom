@@ -125,24 +125,49 @@ function guardaringreso()
         });
      }
     else
-    {
-      
-      $('#validaregreso').text("Verificar: "+alertaValidacion);
-      $('#validaregreso').show();
-
+    {      
+      $('#validaringreso').text("Verificar: "+alertaValidacion);
+      $('#validaringreso').show();
      // alert("Falta llenar o seleccionar los campos: \n"+alertaValidacion+"\n deberán ser llenados o seleccionados");
       alertaValidacion="";
     }
 }
-
-
 function validardatosingreso()
 {
   var todook = true;  
+   if($('#fecha').val()== '')
+  {
+    todook=false;
+    alertaValidacion += " -Se debe completar el fecha";
+  }
+  if($('#tipocambio').val()== '')
+  {
+    todook=false;
+    alertaValidacion += " -Se debe completar el tipo de cambio";
+  }
+  if($('#monto').val()== '')
+  {
+    todook=false;
+    alertaValidacion += " -Se debe completar el Monto";
+  }
+  if($('#docrespaldo').val()== '')
+  {
+    todook=false;
+    alertaValidacion += " -Se debe completar el Documento de Respaldo";
+  }
+  if($('#beneficiario').val()== '')
+  {
+    todook=false;
+    alertaValidacion += " -Se debe completar el Beneficiario";
+  }
+  if($('#descripcioningreso').val()== '')
+  {
+    todook=false;
+    alertaValidacion += " -Se debe completar la  descripcion de egreso";
+  }
+  
   return todook;
-} 
-
-
+}
 ///////////////////////////////AGREGAR INGRESO
 function reg_debe(id)
 {
@@ -155,37 +180,32 @@ function nuevaegreso_ingreso()
   $('#id_persona').val('');
   $('#cuentaegresomodal').modal('show');
 }
-function guardaregreso()
+function guardaringresohaber()
 {  
    if(validardatos())
     { 
-      var enlace = base_url + "Registrar_ingresos/guardaregreso";
+      var enlace = base_url + "Registrar_ingresos/guardaringresohaber";
       var datos = $('#formulariocuentaegreso').serialize();
         $.ajax({
             type: "GET",
             url: enlace,
             data: datos,
             success: function(data)  
-             {
-                //alert(data); 
+            {
                alert('SE GUARDO LA INFORMACION CORRECTAMENTE');
                window.setTimeout('location.reload()', 500);
-             }
+            }
         });
         //alert('bien');
      }
     else
-    {
-      
+    {      
       $('#validaregreso').text("Verificar: "+alertaValidacion);
       $('#validaregreso').show();
-
      // alert("Falta llenar o seleccionar los campos: \n"+alertaValidacion+"\n deberán ser llenados o seleccionados");
       alertaValidacion="";
     }
 }
-
-
 function validardatos()
 {
   var todook = true;
@@ -202,16 +222,28 @@ function validardatos()
     todook=false;
     alertaValidacion += " -Debe seleccionar una subcuenta";
   }
+  if($('#monto_egreso').val()== '')
+  {
+    todook=false;
+    alertaValidacion += " -Se debe completar el Monto Ingreso";
+  }
   if(monto < (saldo+egreso))
   {
     todook=false;
     alertaValidacion += " -El monto es mayor, valor máximo permitido: "+ (monto - saldo);
-  }
-  
+  }  
   return todook;
 } 
 function imprimir_ingreso(id)
 {
-    var enlace = base_url + "reportesingresos/comprobante/"+id;
-    window.open(enlace); 
+    if(confirm('-Posteriormentes ya no se podra realizar ningún cambio a la transacción realizada \n - ¿Estas seguro de generar el comprobante ?'))
+    {
+      var enlace = base_url + "reportes_ingresos/comprobante/"+id;
+      window.open(enlace); 
+      window.setTimeout('location.reload()', 500);
+    }
+    else
+    {
+      return false;
+    }
 }

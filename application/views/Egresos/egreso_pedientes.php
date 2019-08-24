@@ -31,7 +31,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>C orrelativo</th>
+                                            <th>Correlativo</th>
                                             <th>Cuenta Ingreso</th>
                                             <th>Beneficiario</th>
                                             <th>Fecha</th>
@@ -53,10 +53,10 @@
                                             <td ><?= number_format($fila->saldo_debe,2)?></td>    
                                              <td>
                                             <?if($fila->estado == 'PE'){?>                                             
-                                                <button class="btn btn-primary" onclick='reg_debe(<?= $fila->id?>)'>Reg. Haber</button>
+                                                <button class="btn btn-primary" onclick='reg_debe(<?= $fila->id?>)'>Reg. Debe</button>
                                             <?}else {?>
-                                                <button class="btn btn-primary" onclick='reg_debe(<?= $fila->id?>)'>Ver Haber</button><br>
-                                                <button class="btn btn-primary" onclick='imprimir_ingreso(<?= $fila->id?>)'>Imprimir</button>
+                                                <button class="btn btn-primary" onclick='reg_debe(<?= $fila->id?>)'>Ver Debe</button><br>
+                                                <button class="btn btn-primary" onclick='imprimir_egreso(<?= $fila->id?>)'>Imprimir</button>
                                             <?}?> 
                                         </td>                                        
                                         </tr>

@@ -107,6 +107,24 @@ class Ingresos_model extends CI_Model
 		 $this->db->where('id',$id);
 		 return  $this->db->update('cb_ingresos_egresos',$data);
 	}
+	function actualizarsaldoestado_terminado($id,$estado)
+	{
+		
+		$data = array(
+			'estado' =>$estado
+		  );
+		 $this->db->where('id',$id);
+		 return  $this->db->update('cb_ingresos_egresos',$data);
+	}
+	function actualizarsaldoestado_terminado_subcuentas($id,$estado)
+	{
+		
+		$data = array(
+			'estado' =>$estado
+		  );
+		 $this->db->where('idcb_ingreso_egreso',$id);
+		 return  $this->db->update('cb_ingresos_egresos',$data);
+	}
 	function obtenercorrelativo()
 	{
 		$query = $this->db->query("select max(i.correlativo)as maximo

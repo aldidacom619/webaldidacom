@@ -1,6 +1,6 @@
 <?php
 /*
-*/
+*/ 
 
 class Egresos_model extends CI_Model
 {
@@ -126,7 +126,26 @@ class Egresos_model extends CI_Model
 		$this->db->insert('ad_logs',$data);
 		return $this->db->insert_id();
 	}
+	function get_ingreso_subcuenta_id($id)
+	{
+		$query = $this->db->query("select max(i.monto)as ingreso
+									 from cb_ingresos_egresos i
+									where i.estado = 'TE'
+									  and i.tipo_transaccion = 'IN-CU'
+									  and i.cuenta_2 =".$id);	
+        return $query->result();
 
+        
+	}
+	function get_egreso_subcuenta_id($id)
+	{
+		$query = $this->db->query("select max(i.monto)as egreso
+									 from cb_ingresos_egresos i
+									where i.estado IN ('TE','PE')
+									  and i.tipo_transaccion = 'EG'
+									  and i.cuenta_2 =".$id);	
+        return $query->result();
+	}
 
 }
 ?>
