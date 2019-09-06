@@ -168,9 +168,8 @@ class Registrar_egresos extends CI_Controller
 			if($this->input->get('accion')=='nuevo')  
 			{	
 				$log = $this->ingresos_model->insert_logs($this->session->userdata('id'),12);
-				$tipo_transaccion = 'EG-CU
-				';			
-				$registro_ingreso = $this->ingresos_model->insert_ingresos_egresos($this->input->get('id_ingreso'),0,$this->input->get('cuentae'),$this->input->get('sub_cuentae'),$this->input->get('monto_egreso'),$ingreso[0]->fecha,$ingreso[0]->tipo_cambio,$ingreso[0]->documento_respaldo,$ingreso[0]->numero_cheque,$ingreso[0]->idcb_beneficiario,$ingreso[0]->descripcion_transaccion,$tipo_transaccion,$log,0,0,'AC');
+				$tipo_transaccion = 'EG-CU';			
+				$registro_ingreso = $this->ingresos_model->insert_ingresos_egresos($this->input->get('id_ingreso'),0,$this->input->get('cuentae'),$this->input->get('sub_cuentae'),$this->input->get('monto_egreso'),$ingreso[0]->fecha,$ingreso[0]->tipo_cambio,$ingreso[0]->documento_respaldo,$this->input->get('cheque'),$ingreso[0]->idcb_beneficiario,$ingreso[0]->descripcion_transaccion,$tipo_transaccion,$log,0,0,'AC');
 				if($registro_ingreso > 0)
 				{
 					$saldo = $ingreso[0]->saldo_debe - $this->input->get('monto_egreso');
@@ -207,6 +206,18 @@ class Registrar_egresos extends CI_Controller
 		
 		echo $ingreso-$egreso;		
 	}
+	function disponibilidad_liquidez()
+	{
+		$id_ingreso = $this->input->get('cue');		
+		//$id_ingreso = 5;		
+		$ingre = $this->egresos_model->get_ingreso_subcuenta_id_liquidez($id_ingreso);
+		$egre = $this->egresos_model->get_egreso_subcuenta_id_liquidez($id_ingreso);
+		$ingreso = $ingre[0]->ingreso;
+		$egreso = $egre[0]->egreso;
+		
+		echo $ingreso-$egreso;		
+	}
+
 	
 
 	

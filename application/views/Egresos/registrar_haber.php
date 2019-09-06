@@ -15,8 +15,8 @@
                 <strong> CUENTA:
                     <?= cuentas_denominacion($ingresos[0]->cuenta_1)." -  ".cuentas_denominacion($ingresos[0]->cuenta_2)?><br>
                             FECHA: <?= $ingresos[0]->fecha?><br>
-                            MONTO: <?= number_format($ingresos[0]->monto,2)?><br>
-                            SALDO: <?= number_format(($ingresos[0]->saldo_debe),2)?>
+                            MONTO EGRESO: <?= number_format($ingresos[0]->monto,2)?><br>
+                            SALDO PENDIENTE: <?= number_format(($ingresos[0]->saldo_debe),2)?>
                 </strong>
             </div>
         </div>
@@ -120,6 +120,10 @@
 			                </SELECT> 
 			              </div>
                           <div class="form-group">
+                                <label>MONTO DISPONIBLE EN CUENTA</label>
+                                <input class="form-control" id="montodisponible" name="montodisponible"  disabled="true">
+                          </div>
+                          <div class="form-group">
                                 <label>NUMERO DE CHEQUE</label>
                                 <input class="form-control" id="cheque" name="cheque" required="required">
                           </div>
@@ -133,7 +137,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick='cerrarmodal()'><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick='guardaregresodebe()'><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+                    <button type="button" class="btn btn-primary" id = "guardaregresos" onclick='guardaregresodebe()'><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                 </div>
             </div>
         </div>

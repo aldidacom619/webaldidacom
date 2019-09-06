@@ -33,6 +33,14 @@ class Ingresos_model extends CI_Model
 									  and i.estado = 'AC'");	
         return $query->result();
 	}
+	function ingresos_egresos_report_id($id)
+	{
+		$query = $this->db->query("select *
+									 from cb_ingresos_egresos i
+									where i.idcb_ingreso_egreso =". $id."
+									  and i.estado = 'TE'");	
+        return $query->result();
+	}
 	function getcuentas_tabla()
 	{
 		$query = $this->db->query("select *

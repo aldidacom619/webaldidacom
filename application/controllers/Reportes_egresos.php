@@ -7,6 +7,8 @@ class Reportes_egresos extends CI_Controller
 
     		$this->load->model('roles_model');
 			$this->load->model('ingresos_model');
+			$this->load->model('Cuentas_model');
+			$this->load->model('Beneficiarios_model');
 			$this->load->helper(array('form', 'url'));
 			$this->load->library('form_validation');
 			//$this->load->helper('Menu_helper');
@@ -39,21 +41,61 @@ class Reportes_egresos extends CI_Controller
         {
         	echo $id;
         }
+        function numerocomprobante($numero)
+        {
+        	if($numero < 10)
+        	{
+				$comprobante = "000".$numero;	
+        	}
+        	else
+        	{
+	        	if($numero < 100)
+	        	{
+	        		$comprobante = "00".$numero;	
+	        	}
+	        	else
+	        	{
+	        		if($numero < 1000)
+		        	{
+		        		$comprobante = "0".$numero;	
+		        	}
+		        	else
+		        	{
+		        		$comprobante = $numero;		
+		        	}		
+	        	}
+        	}
+        	return $comprobante;
+        } 
+    	function cuentas_denominacion($idcuenta)
+		{
+		  $cuenta = $this->Cuentas_model->get_cuentas($idcuenta);
+		  $denominacion = $cuenta[0]->denominacion_cuenta;
+		  return $denominacion;  
+		} 
+		function getbeneficiarios($id)
+		{
+		  $cuenta = $this->Beneficiarios_model->get_beneficiario($id);
+		  $denominacion = $cuenta[0]->nombres;
+		  return $denominacion;  
+		} 
         function comprobante($id)
         {
            
             $cambiar_estado = $this->ingresos_model->actualizarsaldoestado_terminado($id,'TE');
             $cambiar_estado_subcuentas = $this->ingresos_model->actualizarsaldoestado_terminado_subcuentas($id,'TE');
             $ingresos = $this->ingresos_model->ingresos_id($id);
-			$egresos = $this->ingresos_model->ingresos_egresos_id($id);
+			$egresos = $this->ingresos_model->ingresos_egresos_report_id($id);
 
            $tbl_fondoTitulos1 = array('height' => '10', 'align' => 'C', 'font_name' => 'Arial', 'font_size' => '8', 'font_style' => '','fillcolor' => '150,203,184', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
-             $tbl_cuerpo = array('height' => '3', 'align' => 'R', 'font_name' => 'Arial', 'font_size' => '8', 'font_style' => 'B', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
-            $tbl_cuerpo1 = array('height' => '7', 'align' => 'C', 'font_name' => 'Arial', 'font_size' => '9', 'font_style' => 'B', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
+             $tbl_cuerpo = array('height' => '2', 'align' => 'R', 'font_name' => 'Arial', 'font_size' => '8', 'font_style' => 'B', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
+            $tbl_cuerpo1 = array('height' => '4', 'align' => 'C', 'font_name' => 'Arial', 'font_size' => '9', 'font_style' => 'B', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
             $tbl_cuerpo2 = array('height' => '5', 'align' => 'C', 'font_name' => 'Arial', 'font_size' => '7', 'font_style' => '', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
             $tbl_cuerpo3 = array('height' => '5', 'align' => 'R', 'font_name' => 'Arial', 'font_size' => '7', 'font_style' => '', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
             $tbl_cuerpo4 = array('height' => '5', 'align' => 'L', 'font_name' => 'Arial', 'font_size' => '7', 'font_style' => '', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
+            $tbl_cuerpo5 = array('height' => '20', 'align' => 'L', 'font_name' => 'Arial', 'font_size' => '7', 'font_style' => '', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.2', 'linearea' => 'LTBR');
             $col_color = "255,255,255";
+
             $tbl_trasparente1 = array('height' => '7', 'align' => 'R', 'font_name' => 'Arial', 'font_size' => '8', 'font_style' => 'B','fillcolor' => '255,255,255', 'textcolor' => '0,0,0', 'drawcolor' => '255,255,255', 'linewidth' => '0.2', 'linearea' => 'LTBR');
             $tbl_trasparente2 = array('height' => '7', 'align' => 'L', 'font_name' => 'Arial', 'font_size' => '8', 'font_style' => '','fillcolor' => '255,255,255', 'textcolor' => '0,0,0', 'drawcolor' => '255,255,255', 'linewidth' => '0.2', 'linearea' => 'LTBR');
             $tbl_trasparente3 = array('height' => '7', 'align' => 'R', 'font_name' => 'Arial', 'font_size' => '9', 'font_style' => 'B','fillcolor' => '255,255,255', 'textcolor' => '0,0,0', 'drawcolor' => '255,255,255', 'linewidth' => '0.2', 'linearea' => 'LTBR');
@@ -87,8 +129,8 @@ class Reportes_egresos extends CI_Controller
            
             $col1[] = array_merge(array('text' => utf8_decode('ENTIDAD:'), 'width' => 20, 'fillcolor' => $col_color),$tbl_trasparente1);
             $col1[] = array_merge(array('text' => utf8_decode("DEFENSORIA DEL PUEBLO "), 'width' => 110, 'fillcolor' => $col_color),$tbl_trasparente2); 
-            $col1[] = array_merge(array('text' => utf8_decode('FECHA DE INGRESO:'), 'width' => 33, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col1[] = array_merge(array('text' => utf8_decode("02/08/2019"), 'width' => 33, 'fillcolor' => $col_color),$tbl_trasparente2);
+            $col1[] = array_merge(array('text' => utf8_decode('FECHA DE EGRESO:'), 'width' => 33, 'fillcolor' => $col_color),$tbl_trasparente1);
+            $col1[] = array_merge(array('text' => utf8_decode($ingresos[0]->fecha), 'width' => 33, 'fillcolor' => $col_color),$tbl_trasparente2);
             $columnas1[] = $col1;
             unset($col1); 
 			 if(1 == 1)
@@ -98,84 +140,78 @@ class Reportes_egresos extends CI_Controller
             $col1[] = array_merge(array('text' => utf8_decode('MONEDA:'), 'width' => 20, 'fillcolor' => $col_color),$tbl_trasparente1);
             $col1[] = array_merge(array('text' => utf8_decode($moneda), 'width' => 34, 'fillcolor' => $col_color),$tbl_trasparente2);
             $col1[] = array_merge(array('text' => utf8_decode('TIPO DE CAMBIO:'), 'width' => 34, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col1[] = array_merge(array('text' => utf8_decode("6.97"), 'width' => 10, 'fillcolor' => $col_color),$tbl_trasparente2);
+            $col1[] = array_merge(array('text' => utf8_decode($ingresos[0]->tipo_cambio), 'width' => 10, 'fillcolor' => $col_color),$tbl_trasparente2);
             $col1[] = array_merge(array('text' => utf8_decode('DOCUMENTO DE RESPALDO:'), 'width' => 46, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col1[] = array_merge(array('text' => utf8_decode("Deposito Bancario"), 'width' => 52, 'fillcolor' => $col_color),$tbl_trasparente2);
+            $col1[] = array_merge(array('text' => utf8_decode($ingresos[0]->documento_respaldo), 'width' => 52, 'fillcolor' => $col_color),$tbl_trasparente2);
             $columnas1[] = $col1;
              unset($col1); 
              $col1[] = array_merge(array('text' => utf8_decode('NRO.:'), 'width' => 20, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col1[] = array_merge(array('text' => utf8_decode("00001"), 'width' => 110, 'fillcolor' => $col_color),$tbl_trasparente2); 
+            $col1[] = array_merge(array('text' => utf8_decode($this->numerocomprobante($ingresos[0]->correlativo)), 'width' => 110, 'fillcolor' => $col_color),$tbl_trasparente2); 
             $columnas1[] = $col1;
-           
-/*
-            $col2[] = array_merge(array('text' => utf8_decode('RECIBI CONFORME:'.nombre_usuario($kardex[0]->usuario)), 'width' => 96, 'fillcolor' => $col_color),$tbl_trasparente5);
-            
-             $col2[] = array_merge(array('text' => utf8_decode('ENTREGUE CONFORME:'.nombre_prestatario($kardex[0]->persona)), 'width' => 96, 'fillcolor' => $col_color),$tbl_trasparente5);
-            
-            $columnas2[] = $col2;
+            unset($col1); 
+
             
 
-
-            $col3[] = array_merge(array('text' => utf8_decode('EMPRESA DE PRESTAMOS FINANCYATE'), 'width' => 192, 'fillcolor' => $col_color),$tbl_trasparente6);
-             $columnas3[] = $col3;
-             unset($col3); 
-             $col3[] = array_merge(array('text' => utf8_decode('RECIBO DE PAGOS (Copia)'), 'width' => 192, 'fillcolor' => $col_color),$tbl_trasparente6);
-              $columnas3[] = $col3;
-             unset($col3); 
-             $col3[] = array_merge(array('text' => utf8_decode('FECHA ACTUAL:'.$fecha_hoy." Hrs:".$hora ), 'width' => 192, 'fillcolor' => $col_color),$tbl_trasparente7);
-             $columnas3[] = $col3;
-             unset($col3); 
-
-
-
-              $col3[] = array_merge(array('text' => utf8_decode('NUMERO DE RECIBO:'), 'width' => 52, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col3[] = array_merge(array('text' => utf8_decode($kardex[0]->correlativo."/".$kardex[0]->gestion), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente2); 
-            $col3[] = array_merge(array('text' => utf8_decode('FECHA DE PAGO:'), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col3[] = array_merge(array('text' => utf8_decode($kardex[0]->fecha_pago), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente2);
-            $columnas3[] = $col3;
-            unset($col3); 
-
-            $col3[] = array_merge(array('text' => utf8_decode('NOMBRE PRESTATARIO:'), 'width' => 52, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col3[] = array_merge(array('text' => utf8_decode(nombre_prestatario($kardex[0]->persona)), 'width' => 120, 'fillcolor' => $col_color),$tbl_trasparente2);
-            $columnas3[] = $col3;
-            unset($col3); 
-
-            $col3[] = array_merge(array('text' => utf8_decode('MONTO DE PAGO:'), 'width' => 52, 'fillcolor' => $col_color),$tbl_trasparente1);
-            if($kardex[0]->tipo_moneda == 1)
-            {$moneda = "Bolivianos";  $col3[] = array_merge(array('text' => utf8_decode($kardex[0]->montobs.".-"), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente2);}else
-            {$moneda = "Dolares"; $col3[] = array_merge(array('text' => utf8_decode($kardex[0]->monto.".-"), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente2);}
-
-            $col3[] = array_merge(array('text' => utf8_decode('NRO DE AMORTIZACION:'), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col3[] = array_merge(array('text' => utf8_decode($kardex[0]->nropago." AMORTIZACION"), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente2);
-            $columnas3[] = $col3;
-            unset($col3);
-            $col3[] = array_merge(array('text' => utf8_decode('TIPO DE MONEDA:'), 'width' => 52, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col3[] = array_merge(array('text' => utf8_decode($moneda), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente2);
-             $col3[] = array_merge(array('text' => utf8_decode('TIPO DE CAMBIO:'), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col3[] = array_merge(array('text' => utf8_decode($kardex[0]->tipocambio), 'width' => 48, 'fillcolor' => $col_color),$tbl_trasparente2);
-            $columnas3[] = $col3;
-             unset($col3); 
-
-             $col3[] = array_merge(array('text' => utf8_decode('POR CONCEPTO DE :'), 'width' => 52, 'fillcolor' => $col_color),$tbl_trasparente1);
-            $col3[] = array_merge(array('text' => utf8_decode($kardex[0]->concepto_pago), 'width' => 120, 'fillcolor' => $col_color),$tbl_trasparente2);
-             $columnas3[] = $col3;
+            $col1[] = array_merge(array('text' => utf8_decode('CODIGO CONTABLE'), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo1);
+            $col1[] = array_merge(array('text' => utf8_decode("NUMERO DE CHEQUE "), 'width' => 30, 'fillcolor' => $col_color),$tbl_cuerpo1); 
+            $col1[] = array_merge(array('text' => utf8_decode('DESCRIPCION DE LAS CUENTAS:'), 'width' => 63, 'fillcolor' => $col_color),$tbl_cuerpo1);
+            $col1[] = array_merge(array('text' => utf8_decode('D H'), 'width' => 5, 'fillcolor' => $col_color),$tbl_cuerpo1);
+            $col1[] = array_merge(array('text' => utf8_decode('PARCIALES'), 'width' => 33, 'fillcolor' => $col_color),$tbl_cuerpo1);
+            $col1[] = array_merge(array('text' => utf8_decode('DEBE'), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo1);
+            $col1[] = array_merge(array('text' => utf8_decode('HABER'), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo1);
+            
+            $columnas1[] = $col1;
+            unset($col1); 
+             $col1[] = array_merge(array('text' => utf8_decode($ingresos[0]->cuenta_2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo2);
+            $col1[] = array_merge(array('text' => utf8_decode($ingresos[0]->numero_cheque), 'width' => 30, 'fillcolor' => $col_color),$tbl_cuerpo2); 
+            $col1[] = array_merge(array('text' => utf8_decode($this->cuentas_denominacion($ingresos[0]->cuenta_1)." - ".$this->cuentas_denominacion($ingresos[0]->cuenta_2)), 'width' => 63, 'fillcolor' => $col_color),$tbl_cuerpo4);
+            $col1[] = array_merge(array('text' => utf8_decode('H H'), 'width' => 5, 'fillcolor' => $col_color),$tbl_cuerpo2);
+            $col1[] = array_merge(array('text' => number_format($ingresos[0]->monto,2), 'width' => 33, 'fillcolor' => $col_color),$tbl_cuerpo3);
+            $col1[] = array_merge(array('text' => number_format($ingresos[0]->monto,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
+            $col1[] = array_merge(array('text' => utf8_decode(''), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo2);
+			$columnas1[] = $col1;
+			$suma = 0;
+			foreach($egresos as $valor)
+            {
+            	unset($col1); 
+	            $col1[] = array_merge(array('text' => utf8_decode($valor->cuenta_2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo2);
+	            $col1[] = array_merge(array('text' => utf8_decode($valor->numero_cheque), 'width' => 30, 'fillcolor' => $col_color),$tbl_cuerpo2); 
+	            $col1[] = array_merge(array('text' => utf8_decode($this->cuentas_denominacion($valor->cuenta_1)." - ".$this->cuentas_denominacion($valor->cuenta_2)), 'width' => 63, 'fillcolor' => $col_color),$tbl_cuerpo4);
+	            $col1[] = array_merge(array('text' => utf8_decode('D D'), 'width' => 5, 'fillcolor' => $col_color),$tbl_cuerpo2);
+	            $col1[] = array_merge(array('text' => number_format($valor->monto,2), 'width' => 33, 'fillcolor' => $col_color),$tbl_cuerpo3);
+	            $col1[] = array_merge(array('text' => utf8_decode(''), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo2);
+	            $col1[] = array_merge(array('text' => number_format($valor->monto,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
+				$columnas1[] = $col1;
+				$suma = $suma + $valor->monto;
+            } 
+			unset($col1); 
              
+            $col1[] = array_merge(array('text' => utf8_decode('TOTALES'), 'width' => 151, 'fillcolor' => $col_color),$tbl_cuerpo1);
+            $col1[] = array_merge(array('text' => number_format($ingresos[0]->monto,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
+            $col1[] = array_merge(array('text' => number_format($suma,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
+            $columnas1[] = $col1;
+			 
+            unset($col1); 
+             
+            $col1[] = array_merge(array('text' => utf8_decode('Beneficiario:'.$this->getbeneficiarios($ingresos[0]->idcb_beneficiario)), 'width' => 96, 'fillcolor' => $col_color),$tbl_cuerpo4);
+            $col1[] = array_merge(array('text' => utf8_decode('Descripción de la Transacción:'.$ingresos[0]->descripcion_transaccion), 'width' => 95, 'fillcolor' => $col_color),$tbl_cuerpo4);
+            $columnas1[] = $col1;
+            unset($col1); 
+             
+            $col1[] = array_merge(array('text' => utf8_decode('ELABORADOR POR:               '), 'width' => 39, 'fillcolor' => $col_color),$tbl_cuerpo5);
+            $col1[] = array_merge(array('text' => utf8_decode('REVISADO POR:               '), 'width' => 38, 'fillcolor' => $col_color),$tbl_cuerpo5);
+            $col1[] = array_merge(array('text' => utf8_decode('APROBADO POR:               '), 'width' => 38, 'fillcolor' => $col_color),$tbl_cuerpo5);
+            $col1[] = array_merge(array('text' => utf8_decode('APROBADO POR:               '), 'width' => 38, 'fillcolor' => $col_color),$tbl_cuerpo5);
+            $col1[] = array_merge(array('text' => utf8_decode('APROBADO POR:               '), 'width' => 38, 'fillcolor' => $col_color),$tbl_cuerpo5);
+            $columnas1[] = $col1;
 
-            $col4[] = array_merge(array('text' => utf8_decode('RECIBI CONFORME:'.nombre_usuario($kardex[0]->usuario)), 'width' => 96, 'fillcolor' => $col_color),$tbl_trasparente5);
-            
-             $col4[] = array_merge(array('text' => utf8_decode('ENTREGUE CONFORME:'.nombre_prestatario($kardex[0]->persona)), 'width' => 96, 'fillcolor' => $col_color),$tbl_trasparente5);
-            
-            $columnas4[] = $col4;
-
-
-*/
             
       $this->fpdf->Line(20, 120, 200, 120);
              $this->fpdf->WriteTable($columnas1); 
              $this->fpdf->Ln(25);
-            /*$this->fpdf->WriteTable($columnas2);
+           // $this->fpdf->WriteTable($columnas2);
 
-             $this->fpdf->Ln(25);
+         /*    $this->fpdf->Ln(25);
             $this->fpdf->WriteTable($columnas3);
       $this->fpdf->Ln(25);
             $this->fpdf->WriteTable($columnas4);*/

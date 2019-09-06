@@ -51,6 +51,31 @@ function validacioncuentasegreso()
             }
         });
  	  });
+    $('#sub_cuentae').change(function () 
+    {
+
+      var cuenta = $('#sub_cuentae').val();
+      var enlace = base_url + "Registrar_egresos/disponibilidad_liquidez";
+        $.ajax({
+            type: "GET",
+            url: enlace,
+             data: {cue:cuenta},
+            success: function(data) 
+            {
+              var monto = parseFloat(data); 
+              if(0 < monto)
+              {
+                $('#guardaregresos').prop('disabled', false);                
+              }
+              else{
+                $('#guardaregresos').prop('disabled', true);
+              }
+              $('#montodisponible').val(monto);   
+
+            }
+        });
+    });
+
     
 
 }
@@ -256,9 +281,9 @@ function guardaregresodebe()
 function validardatos()
 {
   var todook = true;
-  var monto = parseFloat($('#montoingreso').val());
+  var ingreso = parseFloat($('#montoingreso').val());
   var saldo = parseFloat($('#saldoegreso').val());
-  var egreso = parseFloat($('#monto_egreso').val());
+  var monto = parseFloat($('#monto_egreso').val());
   if($('#cuentae').val()== -1)
   {
     todook=false;
@@ -279,10 +304,10 @@ function validardatos()
     todook=false;
     alertaValidacion += " -Se debe completar el Monto Egreso";
   }
-  if(monto < (saldo+egreso))
+  if((ingreso-saldo) < monto)
   {
     todook=false;
-    alertaValidacion += " -El monto es mayor, valor máximo permitido: "+ (monto - saldo);
+    alertaValidacion += " -El monto es mayor, valor máximo permitido: "+ (ingreso-saldo);
   }  
   return todook;
 } 

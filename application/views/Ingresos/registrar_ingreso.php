@@ -55,7 +55,10 @@
                             
                             <div class="form-group">
                                    <label>BENEFICIARIO</label>
-                                   <input class="form-control" id="beneficiario" name="beneficiario" required="required">
+                                   <input type="hidden" class="form-control" id="beneficiario" name="beneficiario" required="required">
+                            </div> 
+                             <div class="alert alert-warning">
+                                <button class="btn btn-prymari" onclick='agregargarantes()'>AGREGAR</button><strong></strong>
                             </div> 
                             <div class="form-group">
                                    <label>DESCRIPCION TRANSACCION </label>

@@ -128,7 +128,7 @@ class Egresos_model extends CI_Model
 	}
 	function get_ingreso_subcuenta_id($id)
 	{
-		$query = $this->db->query("select max(i.monto)as ingreso
+		$query = $this->db->query("select sum(i.monto)as ingreso
 									 from cb_ingresos_egresos i
 									where i.estado = 'TE'
 									  and i.tipo_transaccion = 'IN-CU'
@@ -139,7 +139,7 @@ class Egresos_model extends CI_Model
 	}
 	function get_egreso_subcuenta_id($id)
 	{
-		$query = $this->db->query("select max(i.monto)as egreso
+		$query = $this->db->query("select sum(i.monto)as egreso
 									 from cb_ingresos_egresos i
 									where i.estado IN ('TE','PE')
 									  and i.tipo_transaccion = 'EG'
@@ -147,5 +147,63 @@ class Egresos_model extends CI_Model
         return $query->result();
 	}
 
+	function get_ingreso_subcuenta_id_liquidez($id)
+	{
+		$query = $this->db->query("select sum(i.monto)as ingreso
+									 from cb_ingresos_egresos i
+									where i.estado = 'TE'
+									  and i.tipo_transaccion = 'IN'
+									  and i.cuenta_2 =".$id);	
+        return $query->result();
+
+        
+	}
+	function get_egreso_subcuenta_id_liquidez($id)
+	{
+		$query = $this->db->query("select sum(i.monto)as egreso
+									 from cb_ingresos_egresos i
+									where i.estado IN ('TE','PE')
+									  and i.tipo_transaccion = 'EG-CU'
+									  and i.cuenta_2 =".$id);	
+        return $query->result();
+	}
+	function get_ingresos_egresos($entidad)
+	{
+		$query = $this->db->query("select c.codigo,c.denominacion_cuenta,
+									(select sum(i.monto)
+									 from cb_ingresos_egresos i
+									where i.estado = 'TE'
+									  and i.tipo_transaccion = 'IN-CU'
+									  and i.cuenta_2 = c.codigo)as ingresos,
+                    				(select sum(i.monto)
+									 from cb_ingresos_egresos i
+									where i.estado = 'TE'
+									  and i.tipo_transaccion = 'EG'
+									  and i.cuenta_2 = c.codigo)as egresos
+								  from cb_cuentas c 
+								 where c.nivel = 2
+								  and c.codad_entidad =".$entidad);	
+        return $query->result();
+
+        
+	}
+	function get_ingresos_egresos_bancos($entidad)
+	{
+		$query = $this->db->query(" select c.codigo, c.denominacion_cuenta,
+			                       (select sum(i.monto)
+									  from cb_ingresos_egresos i
+									 where i.estado = 'TE'
+									   and i.tipo_transaccion = 'IN'
+									   and i.cuenta_2 = c.codigo)as ingresos,
+                    			   (select sum(i.monto)
+									  from cb_ingresos_egresos i
+									 where i.estado = 'TE'
+									   and i.tipo_transaccion = 'EG-CU'
+									   and i.cuenta_2 = c.codigo)as egresos
+								      from cb_cuentas c 
+									 where c.nivel = 2
+									   and c.codad_entidad =".$entidad);	
+        return $query->result();
+	}
 }
 ?>
