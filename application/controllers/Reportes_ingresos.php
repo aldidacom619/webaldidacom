@@ -167,8 +167,8 @@ class Reportes_ingresos extends CI_Controller
             $col1[] = array_merge(array('text' => utf8_decode($this->cuentas_denominacion($ingresos[0]->cuenta_1)." - ".$this->cuentas_denominacion($ingresos[0]->cuenta_2)), 'width' => 63, 'fillcolor' => $col_color),$tbl_cuerpo4);
             $col1[] = array_merge(array('text' => utf8_decode('D D'), 'width' => 5, 'fillcolor' => $col_color),$tbl_cuerpo2);
             $col1[] = array_merge(array('text' => number_format($ingresos[0]->monto,2), 'width' => 33, 'fillcolor' => $col_color),$tbl_cuerpo3);
-            $col1[] = array_merge(array('text' => utf8_decode(''), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo2);
             $col1[] = array_merge(array('text' => number_format($ingresos[0]->monto,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
+            $col1[] = array_merge(array('text' => utf8_decode(''), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo2);
             
             $columnas1[] = $col1;
             $suma = 0;
@@ -180,16 +180,17 @@ class Reportes_ingresos extends CI_Controller
                 $col1[] = array_merge(array('text' => utf8_decode($this->cuentas_denominacion($valor->cuenta_1)." - ".$this->cuentas_denominacion($valor->cuenta_2)), 'width' => 63, 'fillcolor' => $col_color),$tbl_cuerpo4);
                 $col1[] = array_merge(array('text' => utf8_decode('H H'), 'width' => 5, 'fillcolor' => $col_color),$tbl_cuerpo2);
                 $col1[] = array_merge(array('text' => number_format($valor->monto,2), 'width' => 33, 'fillcolor' => $col_color),$tbl_cuerpo3);
-                $col1[] = array_merge(array('text' => number_format($valor->monto,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
+                
                 $col1[] = array_merge(array('text' => utf8_decode(''), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo2);
+                $col1[] = array_merge(array('text' => number_format($valor->monto,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
                 $columnas1[] = $col1;
                 $suma = $suma + $valor->monto;
             } 
             unset($col1); 
              
             $col1[] = array_merge(array('text' => utf8_decode('TOTALES'), 'width' => 151, 'fillcolor' => $col_color),$tbl_cuerpo1);
-            $col1[] = array_merge(array('text' => number_format($suma,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
             $col1[] = array_merge(array('text' => number_format($ingresos[0]->monto,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
+            $col1[] = array_merge(array('text' => number_format($suma,2), 'width' => 20, 'fillcolor' => $col_color),$tbl_cuerpo3);
             
             $columnas1[] = $col1;
              

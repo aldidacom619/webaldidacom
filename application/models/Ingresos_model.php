@@ -152,6 +152,22 @@ class Ingresos_model extends CI_Model
 		$this->db->insert('ad_logs',$data);
 		return $this->db->insert_id();
 	}
+	function getbuscarbeneficiarios($entidad,$ci)
+	{
+		$query = $this->db->query("select *from cb_beneficiarios  where  codad_entidad = ".$entidad." and   upper(nombres) like upper('%".$ci."%') and  estado = 'AC'");	
+		return $query->result();	
+	}
+	function guardarbenefici($entidad,$nombres)
+	{
+		$data = array(
+			'codad_entidad' => $entidad,
+			'nombres' => strtoupper($nombres),
+			'estado' =>'AC',
+		 );
+		$this->db->insert('cb_beneficiarios',$data);
+		return $this->db->insert_id();
+	}
+
 
 
 }

@@ -118,7 +118,7 @@ class Registrar_ingresos extends CI_Controller
 				$correl = $this->ingresos_model->obtenercorrelativo();
 				$correlativo = $correl[0]->maximo + 1;
 				$log = $this->ingresos_model->insert_logs($id_usu = $this->session->userdata('id'),11);
-				$beneficiario = 2;
+				$beneficiario = $this->input->get('beneficiario');
 				$ingreso = $this->ingresos_model->insert_ingresos_egresos(0,$correlativo,$this->input->get('cuenta'),$this->input->get('sub_cuenta'),$this->input->get('monto'),$this->input->get('fecha'),$this->input->get('tipocambio'),$this->input->get('docrespaldo'),'',$beneficiario,$this->input->get('descripcioningreso'),$tipo_transaccion,$log,0,$this->input->get('monto'),'PE');
 				if($ingreso > 0)
 				{
@@ -198,7 +198,21 @@ class Registrar_ingresos extends CI_Controller
 			redirect("inicio");
 		}
 	}
-	
+
+	function buscarpersona()
+	{
+		$ci = $this->input->get('cis');
+		$entidad = $this->session->userdata('codad_entidad');
+
+		$dato['filas'] = $this->ingresos_model->getbuscarbeneficiarios($entidad,$ci);
+		$this->load->view("Ingresos/buscarbeneficiarios",$dato);
+	}
+	function guardarbenefici()
+	{
+		$entidad = $this->session->userdata('codad_entidad');
+		$idbeneficiario = $this->ingresos_model->guardarbenefici($entidad, $this->input->get('nombrebene'));
+		echo $idbeneficiario;
+	}
 
 	
 }

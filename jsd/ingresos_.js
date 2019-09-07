@@ -1,7 +1,7 @@
 var base_url;
 var alertaValidacion = '';
 var validarci = false;
-
+ 
 function baseurl(enlace)
 {
     base_url = enlace;  
@@ -51,33 +51,6 @@ function validacioncuentasegreso()
             }
         });
  	  });
-    $('#sub_cuentae').change(function () 
-    {
-
-      var cuenta = $('#sub_cuentae').val();
-      var enlace = base_url + "Registrar_egresos/disponibilidad_liquidez";
-        $.ajax({
-            type: "GET",
-            url: enlace,
-             data: {cue:cuenta},
-            success: function(data) 
-            {
-              var monto = parseFloat(data); 
-              if(0 < monto)
-              {
-                $('#guardaregresos').prop('disabled', false);                
-              }
-              else{
-                $('#guardaregresos').prop('disabled', true);
-              }
-              $('#montodisponible').val(monto);   
-
-            }
-        });
-    });
-
-    
-
 }
 function validacioncuentasingreso(){
 
@@ -122,86 +95,47 @@ function validacioncuentasingreso(){
             }
         });
     });
-    $('#sub_cuenta').change(function () 
-    {
-
-      var cuenta = $('#sub_cuenta').val();
-      var enlace = base_url + "Registrar_egresos/disponibilidad";
-        $.ajax({
-            type: "GET",
-            url: enlace,
-             data: {cue:cuenta},
-            success: function(data) 
-            {
-              var monto = parseFloat(data); 
-              if(0 < monto)
-              {
-                $('#guardaregreso').prop('disabled', false);                
-              }
-              else{
-                $('#guardaregreso').prop('disabled', true);
-              }
-              $('#disponible').val(monto);   
-
-            }
-        });
-    });
 }
 function cerrarmodal()
 {
   window.setTimeout('location.reload()', 500);
 }
-function nuevo_egreso()
+function nuevo_ingreso()
 {
-    var enlace = base_url + "Registrar_egresos/nuevo_egreso";
+    var enlace = base_url + "Registrar_ingresos/nuevo_ingreso";
     location.href = enlace;    
 }
-function guardaregresos()
+function guardaringreso()
 {
   if(validardatosingreso())
-  { 
-    var enlace = base_url + "Registrar_egresos/guardaregresos";
-    var datos = $('#formularioingreso').serialize();
-      $.ajax({
-          type: "GET",
-          url: enlace,
-          data: datos,
-          success: function(data)  
-           {
-              //alert(data); 
-             alert('LA INFORMACION SE GUARDO CORRECTAMENTE');
-             var enlace = base_url + "Registrar_egresos";
-             location.href = enlace;
-           }
-      });
-      //alert('bien');
-  }
-  else
-  { 
-    $('#validaregreso').text("Verificar: "+alertaValidacion);
-    $('#validaregreso').show();
-   // alert("Falta llenar o seleccionar los campos: \n"+alertaValidacion+"\n deberán ser llenados o seleccionados");
-    alertaValidacion="";
-  }
+    { 
+      var enlace = base_url + "Registrar_ingresos/guardaringresos";
+      var datos = $('#formularioingreso').serialize();
+        $.ajax({
+            type: "GET",
+            url: enlace,
+            data: datos,
+            success: function(data)  
+             {
+                //alert(data); 
+               alert('LA INFORMACION SE GUARDO CORRECTAMENTE');
+               var enlace = base_url + "Registrar_ingresos";
+               location.href = enlace;
+             }
+        });
+     }
+    else
+    {      
+      $('#validaringreso').text("Verificar: "+alertaValidacion);
+      $('#validaringreso').show();
+     // alert("Falta llenar o seleccionar los campos: \n"+alertaValidacion+"\n deberán ser llenados o seleccionados");
+      alertaValidacion="";
+    }
 }
 function validardatosingreso()
 {
   var todook = true;  
-  var disponible = parseFloat($('#disponible').val());
-  var monto = parseFloat($('#monto').val()); 
-
-  if($('#cuenta').val()== -1)
-  {
-    todook=false;
-    alertaValidacion += " -Debe seleccionar una cuenta";
-  }
-  if($('#sub_cuenta').val()== -1 || $('#sub_cuenta').val() == '')
-  {
-    todook=false;
-    alertaValidacion += " -Debe seleccionar una subcuenta";
-  }
-  
-  if($('#fecha').val()== '')
+   if($('#fecha').val()== '')
   {
     todook=false;
     alertaValidacion += " -Se debe completar el fecha";
@@ -232,43 +166,37 @@ function validardatosingreso()
     alertaValidacion += " -Se debe completar la  descripcion de egreso";
   }
   
-  if(monto > disponible)
-  {
-    todook=false;
-    alertaValidacion += " -El monto es mayor, valor disponible: "+ disponible;
-  }  
-  //alert(disponible+'--'+monto);
   return todook;
 }
-///////////////////////////////AGREGAR EGRESO
+///////////////////////////////AGREGAR INGRESO
 function reg_debe(id)
 {
-    var enlace = base_url + "Registrar_egresos/registrar_debe/"+id;
+    var enlace = base_url + "Registrar_ingresos/registrar_debe/"+id;
     location.href = enlace;    
 }
-function nuevaegreso_debe()
+function nuevaegreso_ingreso()
 {
   $('#accion').val('nuevo');
   $('#id_persona').val('');
   $('#cuentaegresomodal').modal('show');
 }
-function guardaregresodebe()
+function guardaringresohaber()
 {  
    if(validardatos())
     { 
-      var enlace = base_url + "Registrar_egresos/guardaregresodebe";
+      var enlace = base_url + "Registrar_ingresos/guardaringresohaber";
       var datos = $('#formulariocuentaegreso').serialize();
         $.ajax({
             type: "GET",
             url: enlace,
             data: datos,
             success: function(data)  
-             {
-                //alert(data); 
+            {
                alert('SE GUARDO LA INFORMACION CORRECTAMENTE');
                window.setTimeout('location.reload()', 500);
-             }
+            }
         });
+        //alert('bien');
      }
     else
     {      
@@ -281,9 +209,9 @@ function guardaregresodebe()
 function validardatos()
 {
   var todook = true;
-  var ingreso = parseFloat($('#montoingreso').val());
+  var monto = parseFloat($('#montoingreso').val());
   var saldo = parseFloat($('#saldoegreso').val());
-  var monto = parseFloat($('#monto_egreso').val());
+  var egreso = parseFloat($('#monto_egreso').val());
   if($('#cuentae').val()== -1)
   {
     todook=false;
@@ -294,28 +222,23 @@ function validardatos()
     todook=false;
     alertaValidacion += " -Debe seleccionar una subcuenta";
   }
-  if($('#cheque').val()== '')
-  {
-    todook=false;
-    alertaValidacion += " -Se debe completar el Cheque";
-  }
   if($('#monto_egreso').val()== '')
   {
     todook=false;
-    alertaValidacion += " -Se debe completar el Monto Egreso";
+    alertaValidacion += " -Se debe completar el Monto Ingreso";
   }
-  if((ingreso-saldo) < monto)
+  if(monto < (saldo+egreso))
   {
     todook=false;
-    alertaValidacion += " -El monto es mayor, valor máximo permitido: "+ (ingreso-saldo);
+    alertaValidacion += " -El monto es mayor, valor máximo permitido: "+ (monto - saldo);
   }  
   return todook;
 } 
-function imprimir_egreso(id)
+function imprimir_ingreso(id)
 {
     if(confirm('-Posteriormentes ya no se podra realizar ningún cambio a la transacción realizada \n - ¿Estas seguro de generar el comprobante ?'))
     {
-      var enlace = base_url + "reportes_egresos/comprobante/"+id;
+      var enlace = base_url + "reportes_ingresos/comprobante/"+id;
       window.open(enlace); 
       window.setTimeout('location.reload()', 500);
     }
@@ -323,7 +246,6 @@ function imprimir_egreso(id)
     {
       return false;
     }
-
 }
 /*BENEFICIARIOS*/
 function agregarbeneficiario()
@@ -362,7 +284,7 @@ function agregarbeneficiarios(){
 function seleccionarbeneficiarios(id, nombre)
 {
   
-  $('#nombrebene').attr("readonly", true); 
+  $('#nombrebene').attr("readonly", true);
   $('#accionb').val('seleccionado');
   $('#id_persona').val(id); 
   $('#nombrebene').val(nombre);

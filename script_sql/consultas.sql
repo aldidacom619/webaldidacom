@@ -11,7 +11,7 @@ INSERT INTO `ad_opciones_usuarios` (`id`, `idad_usuario`, `codad_opcion`, `idad_
 
 
 INSERT INTO `ad_opciones_usuarios` (`id`, `idad_usuario`, `codad_opcion`, `idad_logs`, `estado`) VALUES
-(30, 10, 11, 11, 'AC');
+(30, 10, 30, 11, 'AC');
 
 
 
@@ -24,10 +24,9 @@ INSERT INTO `ad_opciones_usuarios` (`id`, `idad_usuario`, `codad_opcion`, `idad_
 
 
 INSERT INTO `ad_opciones` (`codigo`, `codad_modulo`, `codad_opcion`, `opcion`, `descripcion`, `link`, `nivel`, `orden`, `estado`) VALUES
-(26, 16, 26, 'REPORTE CONSULTAS', '', '', 1, 0, 'AC'),
-(27, 16, 26, 'REPORTE INGRESOS', '', 'DDDDDD', 2, 1, 'AC'),
-(28, 16, 26, 'REPORTE EGRESOS', '', 'DDDDDD', 2, 2, 'AC'),
-(29, 16, 26, 'OTROS', '', 'DDDDDD', 2, 3, 'AC');
+(30, 16, 26, 'REIMPRESION COMPROBANTES', '', 'Reportes_otros/reimpresioncomprobante', 2, 4, 'AC');
+
+Reportes_otros/reimpresioncomprobante
 
 
 

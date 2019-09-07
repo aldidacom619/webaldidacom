@@ -30,7 +30,8 @@ class Usuarios extends CI_Controller
 			{
 				$data = array(
 					'is_logued_in'  => TRUE,
-					'id' => $login[0]->id,
+					'id' => $login[0]->id,					
+					'codad_entidad' => $login[0]->codad_entidad,
 					'codad_aplicacion' => $login[0]->codad_aplicacion,
 					'nombres' => $login[0]->nombres,
 					'apellidos' => $login[0]->apellidos,

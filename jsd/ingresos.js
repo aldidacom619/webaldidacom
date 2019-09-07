@@ -1,32 +1,32 @@
 var base_url;
 var alertaValidacion = '';
 var validarci = false;
-
+ 
 function baseurl(enlace)
 {
     base_url = enlace;  
 }
 function validacioncuentasegreso()
 {
-	$("#fecha").datepicker({
+  $("#fecha").datepicker({
     
       format: "yyyy-mm-dd",
       orientation: "top left",
       language: "es" 
     });
 
-	$('#monto_egreso').keyup(function () 
-  	{
-	     var tem = $('#monto_egreso').val(); 
-	     var RE = /^\d*\.?\d*$/;
-	     if (!(RE.test(tem)))
-	     {
-  	 		$('#monto_egreso').val('');  	      		 
-  	 	 }
-	 	 
- 	});
+  $('#monto_egreso').keyup(function () 
+    {
+       var tem = $('#monto_egreso').val(); 
+       var RE = /^\d*\.?\d*$/;
+       if (!(RE.test(tem)))
+       {
+        $('#monto_egreso').val('');              
+       }
+     
+  });
 
-	  var enlace = base_url + "Registrar_ingresos/getcuentas";
+    var enlace = base_url + "Registrar_ingresos/getcuentas";
     $.ajax({
         type: "GET",
         url: enlace,
@@ -36,9 +36,9 @@ function validacioncuentasegreso()
          }
     });
     $('#cuentae').change(function () 
-  	{
+    {
 
-	    var cuenta = $('#cuentae').val();
+      var cuenta = $('#cuentae').val();
       var id_ingreso = $('#id_ingreso').val();
       var enlace = base_url + "Registrar_ingresos/getsubcuenta_id";
         $.ajax({
@@ -47,10 +47,10 @@ function validacioncuentasegreso()
              data: {cue:cuenta,ing:id_ingreso},
             success: function(data) 
             {
-            	$('#sub_cuentae').html(data);            	
+              $('#sub_cuentae').html(data);             
             }
         });
- 	  });
+    });
 }
 function validacioncuentasingreso(){
 
@@ -247,3 +247,106 @@ function imprimir_ingreso(id)
       return false;
     }
 }
+/*BENEFICIARIOS*/
+function agregarbeneficiario()
+{
+  $('#accionb').val('nuevo');
+  /*
+  $('#id_prestamo').val(idprestamo);
+  $('#id_persona').val('');*/
+  $('#personamodal').modal('show'); 
+}
+function agregarbeneficiarios(){
+  $('#cib').keyup(function () 
+    {
+        var ci = $('#cib').val(); 
+        if(ci.length >0 )
+        {
+          $('#nombrebene').val(ci); 
+          var enlace = base_url + "Registrar_ingresos/buscarpersona";
+          $.ajax({
+              type: "GET",
+              url: enlace,
+              data: {cis:ci},
+              success: function(data) 
+              {
+                $('#listagarantes').html(data);             
+              }
+          });
+        }
+        else
+        {
+          $('#listagarantes').html('');
+        }  
+        
+    });
+}
+function seleccionarbeneficiarios(id, nombre)
+{
+  
+  $('#nombrebene').attr("readonly", true);
+  $('#accionb').val('seleccionado');
+  $('#id_persona').val(id); 
+  $('#nombrebene').val(nombre);
+
+}
+function cancelarsel()
+{
+  $('#accionb').val('nuevo');
+  $('#nombrebene').attr("readonly", false);
+  $('#id_persona').val('');
+  $('#nombrebene').val('');
+}
+function guardarbeneficiario()
+{
+  if(confirm('¿Estas seguro de agregar el Beneficiario '+ $('#nombrebene').val() +' ?'))
+  {
+    
+    if($('#accionb').val()=='nuevo')
+    {
+      if(validardatosbeneficiario())
+      { 
+        var enlace = base_url + "Registrar_ingresos/guardarbenefici";
+         var datos = $('#formulariopersona').serialize();
+          $.ajax({
+              type: "GET",
+              url: enlace,
+              data: datos, 
+              success: function(data)  
+               {
+                $('#valorbeneficiario').text(" " + $('#nombrebene').val());
+                $('#beneficiario').val(data); 
+                $('#personamodal').modal('hide');
+               }
+          }); 
+      }
+      else
+      {          
+        $('#validarpersona').text("Verificar: "+alertaValidacion);
+        $('#validarpersona').show();
+       // alert("Falta llenar o seleccionar los campos: \n"+alertaValidacion+"\n deberán ser llenados o seleccionados");
+        alertaValidacion="";
+      }
+    }
+    else
+    {
+      $('#valorbeneficiario').text($('#nombrebene').val());
+      $('#beneficiario').val(' ' + $('#id_persona').val()); 
+      $('#personamodal').modal('hide');
+    }
+  }
+  else
+  {
+    return false;
+  }  
+
+}
+
+
+function validardatosbeneficiario()
+{
+  var todook = true;
+  
+
+  return todook;
+} 

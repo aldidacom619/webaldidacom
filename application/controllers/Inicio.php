@@ -31,7 +31,6 @@ class Inicio extends CI_Controller
 		$dato['ingresos_egresos'] = $this->egresos_model->get_ingresos_egresos($entidad);
 		$dato['ingresos_egresos_bancos'] = $this->egresos_model->get_ingresos_egresos_bancos($entidad); 
 		$this->load->view("Inicio/cabecera");
-		$this->load->view("Inicio/cabecera");		
 		$this->load->view("Inicio/menu",$dato);		
 		$this->load->view("Inicio/cuentas",$dato);		
 		$this->load->view("Inicio/pie");
