@@ -392,8 +392,9 @@ function guardarbeneficiario()
               data: datos, 
               success: function(data)  
                {
+                var idbene = parseFloat(data);
                 $('#valorbeneficiario').text(" " + $('#nombrebene').val());
-                $('#beneficiario').val(data); 
+                $('#beneficiario').val(idbene); 
                 $('#personamodal').modal('hide');
                }
           }); 

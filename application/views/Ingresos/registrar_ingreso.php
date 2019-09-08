@@ -1,4 +1,4 @@
-<?php ob_start('comprimir_pagina_cuerpo'); ?> 
+
 <script type="text/javascript" src="<?php echo  base_url() ?>jsd/ingresos.js"></script>
 <div id="page-wrapper">
 <!-- /#INICIA CUERPO -->
@@ -22,7 +22,7 @@
                             
                             <div class="form-group">
                                    <label>BENEFICIARIO</label>
-                                   <input type="text" class="form-control" id="beneficiario" name="beneficiario" required="required">
+                                   <input type="hidden" class="form-control" id="beneficiario" name="beneficiario">
                             </div> 
                              <div class="alert alert-warning">
                                 <button class="btn btn-prymari" onclick='agregarbeneficiario()'>AGREGAR</button><strong  id="valorbeneficiario"></strong>
@@ -135,14 +135,3 @@
       agregarbeneficiarios();
       });
 </script>
-   
-<?php
-// Una vez que el búfer almacena nuestro contenido utilizamos "ob_end_flush" para usarlo y deshabilitar el búfer
-ob_end_flush(); 
-// Función para eliminar todos los espacios en blanco
-function comprimir_pagina_cuerpo($buffer) { 
-    $busca = array('/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s'); 
-    $reemplaza = array('>','<','\\1'); 
-    return preg_replace($busca, $reemplaza, $buffer); 
-} 
-?>

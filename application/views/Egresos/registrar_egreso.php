@@ -21,7 +21,7 @@
                          <input type="hidden" class="form-control" id="id_ingreso" name="id_ingreso" required="required">
                          <div class="col-lg-4">
                            
-                             <input type="text" class="form-control" id="beneficiario" name="beneficiario" required="required">
+                             <input type="hidden" class="form-control" id="beneficiario" name="beneficiario" required="required">
                            
                              <div class="alert alert-warning">
                                 <button class="btn btn-prymari" onclick='agregarbeneficiario()'>BENEFICIARIO</button><strong  id="valorbeneficiario"></strong>

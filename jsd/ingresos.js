@@ -314,8 +314,9 @@ function guardarbeneficiario()
               data: datos, 
               success: function(data)  
                {
+                var idbene = parseFloat(data);
                 $('#valorbeneficiario').text(" " + $('#nombrebene').val());
-                $('#beneficiario').val(data); 
+                $('#beneficiario').val(idbene); 
                 $('#personamodal').modal('hide');
                }
           }); 
@@ -330,8 +331,8 @@ function guardarbeneficiario()
     }
     else
     {
-      $('#valorbeneficiario').text($('#nombrebene').val());
-      $('#beneficiario').val(' ' + $('#id_persona').val()); 
+      $('#valorbeneficiario').text(' ' + $('#nombrebene').val());
+      $('#beneficiario').val( $('#id_persona').val()); 
       $('#personamodal').modal('hide');
     }
   }
