@@ -36,9 +36,9 @@
                 </li>
            
                 <? foreach($rolescero as $rol):?>
-                    <li>
-                      <a href="<?php echo site_url($rol->link);?>"><i class="fa fa-dashboard fa-fw"></i><?=$rol->opcion?></a>
-                    </li>
+                <li>
+                  <a href="<?php echo site_url($rol->link);?>"><i class="fa fa-dashboard fa-fw"></i><?=$rol->opcion?></a>
+                </li>
                 <?endforeach?> 
                <? $nivelanterior = 0;  ?>
                 <? foreach($roles as $rol):?>
@@ -60,8 +60,9 @@
                     <? $nivelanterior = $rol->nivel;  ?>
                 <?endforeach?>         
                 <? if ($nivelanterior == 2){?>
+                   </li>
                     </ul>
-                  </li>
+                  
                 <?}?>     
             </ul>
         </div>

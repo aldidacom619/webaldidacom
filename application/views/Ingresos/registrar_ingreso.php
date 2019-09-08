@@ -22,7 +22,7 @@
                             
                             <div class="form-group">
                                    <label>BENEFICIARIO</label>
-                                   <input type="hidden" class="form-control" id="beneficiario" name="beneficiario" required="required">
+                                   <input type="text" class="form-control" id="beneficiario" name="beneficiario" required="required">
                             </div> 
                              <div class="alert alert-warning">
                                 <button class="btn btn-prymari" onclick='agregarbeneficiario()'>AGREGAR</button><strong  id="valorbeneficiario"></strong>

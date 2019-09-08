@@ -127,7 +127,7 @@ class Registrar_ingresos extends CI_Controller
 			}
 			else
 			{
-				echo "SE REALIZO LA MODIFICACION CORRECTAMENTE";
+				echo "SE REALIZO LA MODIFICACION CORRECTAMENTE"; 
 			}
 		}
 		else

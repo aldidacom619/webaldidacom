@@ -76,3 +76,20 @@ function primerreporteamortizacion()
      window.open(enlace);
   } 
 }
+function imprimir_ingreso(id)
+{
+   
+      var enlace = base_url + "reportes_ingresos/comprobante/"+id;
+      window.open(enlace); 
+      window.setTimeout('location.reload()', 500);
+    
+}
+function imprimir_egreso(id)
+{
+    
+      var enlace = base_url + "reportes_egresos/comprobante/"+id;
+      window.open(enlace); 
+      window.setTimeout('location.reload()', 500);
+    
+
+}

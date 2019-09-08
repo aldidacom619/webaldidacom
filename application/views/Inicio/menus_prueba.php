@@ -67,3 +67,29 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
+
+
+<? $nivelanterior = 0;  ?>
+                <? foreach($roles as $rol):?>
+                    <? if ($rol->nivel== 1){?>
+                        <? if ($nivelanterior == 2){?>
+                            </ul>
+                          </li>
+                        <?}?>      
+                        <li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i><?=$rol->opcion?><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">                                                      
+                    <?}?>
+                    <? if ($rol->nivel == 2){?>
+                        <li>
+                            <a href="<?php echo site_url($rol->link);?>"><?=$rol->opcion?></a>
+                        </li>
+                    <?}?>
+                    <? $nivelanterior = $rol->nivel;  ?>
+                <?endforeach?>         
+                <? if ($nivelanterior == 2){?>
+                   </li>
+                    </ul>
+                  
+                <?}?>     
