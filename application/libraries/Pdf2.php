@@ -50,7 +50,7 @@ class Pdf2 extends FPDF {
                  
         //encabezado grilla
                 $this->SetFillColor(31,73,125);
-                $this->SetTextColor(255);
+                $this->SetTextColor(255); 
                // $this->SetDrawColor(128,0,0);
                 //$this->SetLineWidth(2);
                 $this->SetFont('Arial','B',6);
@@ -65,7 +65,7 @@ class Pdf2 extends FPDF {
                 $titulo1=  utf8_decode($this->titulo);
                 $this->Cell(0,0,$titulo1,0,0,'C');
                 $this->Ln(5);
-                $this->Cell(0,0,utf8_decode($this->titulo1),0,0,'C');
+                //$this->Cell(0,0,utf8_decode($this->titulo1),0,0,'C');
                 
                 $this->SetFont('Times','',12);
                 
@@ -73,11 +73,13 @@ class Pdf2 extends FPDF {
                 $this->Cell(0,0,utf8_decode($this->fecha),0,0,'C');
                  
         //encabezado grilla
-                $this->SetFillColor(31,73,125);
-                $this->SetTextColor(255);
-               // $this->SetDrawColor(128,0,0);
-                $this->SetLineWidth(.2);
-                $this->SetFont('Arial','B',6);
+                $this->Ln(5);
+                $this->SetFillColor(205,205,205); //COLOR A LA GRILLA
+                //$this->SetFillColor(255,255,255); //COLOR A LA GRILLA
+                $this->SetTextColor(0);
+                $this->SetDrawColor(255,255,255); //border rojo
+                //$this->SetLineWidth(.2);
+                $this->SetFont('Arial','B',8);
                 //Cabecera
                 $this->SetWidths($this->wi);
                 $this->RowHeader($this->encabezado,false,'DF',8);
@@ -106,13 +108,6 @@ class Pdf2 extends FPDF {
                 $this->SetWidths($this->wi);
                 $this->RowHeader($this->encabezado,false,'DF',8);
         }
-
-
-        
-                
-
-     
-
 
     }
 

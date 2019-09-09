@@ -106,7 +106,7 @@
                     </div>
                 </div>
             <form id="formulariopersona">
-                 <input type="text" class="form-control" id="accionb" name="accionb" >
+                 <input type="hidden" class="form-control" id="accionb" name="accionb" >
                  <input type="hidden" class="form-control" id="id_persona" name="id_persona" >                 
                 <div class="row"> 
                     <div class="col-lg-12">

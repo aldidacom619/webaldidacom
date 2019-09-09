@@ -5,14 +5,23 @@ class Reportes_otros extends CI_Controller
 	function __construct(){
 		parent::__construct();	
 		$this->_is_logued_in();	
-		$this->load->model('roles_model');
-		$this->load->model('reportes_model');		
-		
+	
+
+
+
+    	$this->load->model('roles_model');
+    	$this->load->model('reportes_model');	
+		$this->load->model('ingresos_model');
+		$this->load->model('Cuentas_model');
+		$this->load->model('Beneficiarios_model');
 		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
-		$this->load->helper('Menu_helper');
 		$this->load->helper('cuentas_helper');
-		$this->load->helper('date');
+		$this->load->helper('download');
+		$this->load->helper('date'); 
+		$this->load->helper('Menu_helper');
+		$this->load->library('form_validation');
+		$this->load->library('pdf2');
+		
 	}
 	function _is_logued_in()
 	{
@@ -32,7 +41,7 @@ class Reportes_otros extends CI_Controller
 		$this->load->view("Inicio/cabecera");
 		$this->load->view("Inicio/cabecera");		
 		$this->load->view("Inicio/menu",$dato);		
-		//$this->load->view("Inicio/cuerpo");		
+		$this->load->view("reportes/formularios_reportes");		
 		$this->load->view("Inicio/pie");
 	}
 	function reimpresioncomprobante()
@@ -49,6 +58,7 @@ class Reportes_otros extends CI_Controller
 		$this->load->view("reportes/reimpresion_reporte");		
 		$this->load->view("Inicio/pie");
 	}
+	
 	
 }
 ?>

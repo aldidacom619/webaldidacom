@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-09-2019 a las 00:16:19
+-- Tiempo de generación: 09-09-2019 a las 00:53:55
 -- Versión del servidor: 5.5.20
 -- Versión de PHP: 5.3.10
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `ad_logs` (
   `codad_accion` int(11) DEFAULT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=75 ;
 
 --
 -- Volcado de datos para la tabla `ad_logs`
@@ -119,7 +119,19 @@ INSERT INTO `ad_logs` (`id`, `idad_usuario`, `codad_accion`, `fecha`) VALUES
 (59, 10, 11, '2019-09-07 23:50:36'),
 (60, 10, 12, '2019-09-07 23:54:11'),
 (61, 10, 11, '2019-09-07 23:59:14'),
-(62, 10, 12, '2019-09-08 00:00:03');
+(62, 10, 12, '2019-09-08 00:00:03'),
+(63, 10, 11, '2019-09-08 00:24:08'),
+(64, 10, 11, '2019-09-08 00:25:05'),
+(65, 10, 11, '2019-09-08 00:34:50'),
+(66, 10, 12, '2019-09-08 00:35:06'),
+(67, 10, 12, '2019-09-08 00:36:32'),
+(68, 10, 12, '2019-09-08 00:36:45'),
+(69, 10, 12, '2019-09-08 00:37:02'),
+(70, 10, 11, '2019-09-08 18:06:44'),
+(71, 10, 12, '2019-09-08 18:07:00'),
+(72, 10, 12, '2019-09-08 18:07:12'),
+(73, 10, 11, '2019-09-08 18:10:39'),
+(74, 10, 12, '2019-09-08 18:10:58');
 
 -- --------------------------------------------------------
 
@@ -291,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `cb_beneficiarios` (
   `nombres` varchar(200) NOT NULL,
   `estado` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `cb_beneficiarios`
@@ -301,7 +313,13 @@ INSERT INTO `cb_beneficiarios` (`id`, `codad_entidad`, `nombres`, `estado`) VALU
 (1, 2, 'BANCO CENTRAL DE BOLVIA', 'AC'),
 (2, 2, 'MANUEL YANA TINTA', 'AC'),
 (3, 2, 'ORLANDO LA PERRA', 'AC'),
-(4, 2, 'DIEGO DAZA', 'AC');
+(4, 2, 'DIEGO DAZA', 'AC'),
+(5, 2, 'ROFDIRGO', 'AC'),
+(6, 2, 'RAUL', 'AC'),
+(7, 2, 'OSCAR LA HIJA', 'AC'),
+(8, 2, 'JAIME', 'AC'),
+(9, 2, 'FRANCO', 'AC'),
+(10, 2, 'ROMINA', 'AC');
 
 -- --------------------------------------------------------
 
@@ -363,17 +381,18 @@ CREATE TABLE IF NOT EXISTS `cb_ingresos_egresos` (
   `saldo_debe` decimal(10,2) NOT NULL,
   `estado` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Volcado de datos para la tabla `cb_ingresos_egresos`
 --
 
 INSERT INTO `cb_ingresos_egresos` (`id`, `idcb_ingreso_egreso`, `correlativo`, `cuenta_1`, `cuenta_2`, `monto`, `fecha`, `tipo_cambio`, `documento_respaldo`, `numero_cheque`, `idcb_beneficiario`, `descripcion_transaccion`, `tipo_transaccion`, `idad_logs`, `cantidad_cuentas_egreso`, `saldo_debe`, `estado`) VALUES
-(24, 0, 1, 1, 5, '1000.00', '2019-07-02', '6.97', 'ASDFASDF', '', 3, 'ASDFASDF', 'IN', 59, 1, '0.00', 'TE'),
-(25, 24, 0, 2, 6, '1000.00', '2019-07-02', '6.97', 'ASDFASDF', '', 3, 'ASDFASDF', 'IN-CU', 60, 0, '0.00', 'TE'),
-(26, 0, 2, 2, 6, '200.00', '2019-08-15', '6.97', 'BOLETA DE DEPOSITO', '', 4, 'SDGDSFSDFG', 'EG', 61, 1, '0.00', 'TE'),
-(27, 26, 0, 1, 5, '200.00', '2019-08-15', '6.97', 'BOLETA DE DEPOSITO', '12121', 4, 'SDGDSFSDFG', 'EG-CU', 62, 0, '0.00', 'TE');
+(35, 0, 1, 1, 5, '1000.00', '2019-07-02', '6.97', 'BOLETA DE DEPOSITO', '', 1, 'PRUEBAS DE INGRESO DE MONTOS', 'IN', 70, 2, '0.00', 'TE'),
+(36, 35, 0, 2, 6, '400.00', '2019-07-02', '6.97', 'BOLETA DE DEPOSITO', '', 1, 'PRUEBAS DE INGRESO DE MONTOS PRUEBAS DE INGRESO DE MONTOS PRUEBAS DE INGRESO DE MONTOS PRUEBAS DE INGRESO DE MONTOS PRUEBAS DE INGRESO DE MONTOS', 'IN-CU', 71, 0, '0.00', 'TE'),
+(37, 35, 0, 4, 8, '600.00', '2019-07-02', '6.97', 'BOLETA DE DEPOSITO', '', 1, 'PRUEBAS DE INGRESO DE MONTOS', 'IN-CU', 72, 0, '0.00', 'TE'),
+(38, 0, 2, 2, 6, '200.00', '2019-07-02', '6.97', 'DEPOSITO', '', 3, 'AGASDFASDFASDF', 'EG', 73, 1, '0.00', 'TE'),
+(39, 38, 0, 1, 5, '200.00', '2019-07-02', '6.97', 'DEPOSITO', '54554', 3, 'AGASDFASDFASDF', 'EG-CU', 74, 0, '0.00', 'TE');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

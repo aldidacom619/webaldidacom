@@ -7,74 +7,48 @@ function baseurl(enlace)
   base_url = enlace;
    
 }
-function validacionformularioreporte()
+function valoresdefecto()
 {
   
-    var enlace = base_url + "index.php/prestamos/estado_prestamo";
+  $("#fecha1").datepicker({
+    
+      format: "yyyy-mm-dd",
+      orientation: "top left",
+      language: "es" 
+    });
+  $("#fecha2").datepicker({
+    
+      format: "yyyy-mm-dd",
+      orientation: "top left",
+      language: "es" 
+    });
+
+
+
+   var enlace = base_url + "Registrar_ingresos/getcuentas";
     $.ajax({
         type: "GET",
         url: enlace,
         success: function(data)  
          {
-            $('#estadoprestamo').html(data);
+            $('#cuenta').html(data);
          }
     });
-  
-    var moneda = '<option VALUE="-1">Seleccionar opcion</OPTION><option VALUE="1">BOLIVIANOS</OPTION><option VALUE="2">DOLARES</OPTION>';
-    
-    $('#tipomoneda').html(moneda);
-
-
-    $("#fecha1").datepicker({
-    
-      format: "yyyy-mm-dd",
-      orientation: "top left",
-      language: "es" 
+    $('#cuenta').change(function () 
+    {
+      var cuenta = $('#cuenta').val();
+      var enlace = base_url + "Registrar_ingresos/getsubcuenta";
+        $.ajax({
+            type: "GET",
+            url: enlace,
+             data: {cue:cuenta},
+            success: function(data) 
+            {
+              $('#sub_cuenta').html(data);              
+            }
+        });
     });
 
-    $("#fecha2").datepicker({
-    
-      format: "yyyy-mm-dd",
-      orientation: "top left",
-      language: "es" 
-    });
- 
-}
-function primerreporte()
-{
-  if($('#tipomoneda').val() == '-1'){
-    var moneda = 0;
-  }else{
-    var moneda = $('#tipomoneda').val();  
-  }
-
- 
-
-  if($('#estadoprestamo').val() == '-1'){
-    var estado = 0;
-  }else{
-    var estado = $('#estadoprestamo').val();  
-  }
-
- 
-  var enlace = base_url + "index.php/reportes/imprimirprestamos/" + moneda+'/'+estado;
-
-  window.open(enlace);
-}
-
-function primerreporteamortizacion()
-{
-  if($('#fecha1').val() == ''  &&$('#fecha2').val() == '')
-  {
-    alert('POR FAVOR SELECCIONE UN INTERVALO DE FECHAS');
-  }else{
-      
-      var fec1 = $('#fecha1').val(); 
-      var fec2 = $('#fecha2').val();
-      var enlace = base_url + "index.php/reportes/reporteamortizaciones/" + fec1+'/'+fec2;
-
-     window.open(enlace);
-  } 
 }
 function imprimir_ingreso(id)
 {
@@ -92,4 +66,30 @@ function imprimir_egreso(id)
       window.setTimeout('location.reload()', 500);
     
 
+}
+
+
+function imprimirporcuentas()
+{
+  
+
+  var subcuenta = $('#sub_cuenta').val();
+  var enlace = base_url + "imprimir_reportes/imprimirporcuentas/" + subcuenta;
+
+  window.open(enlace);
+}
+
+function primerreporteamortizacion()
+{
+  if($('#fecha1').val() == ''  &&$('#fecha2').val() == '')
+  {
+    alert('POR FAVOR SELECCIONE UN INTERVALO DE FECHAS');
+  }else{
+      
+      var fec1 = $('#fecha1').val(); 
+      var fec2 = $('#fecha2').val();
+      var enlace = base_url + "index.php/reportes/reporteamortizaciones/" + fec1+'/'+fec2;
+
+     window.open(enlace);
+  } 
 }

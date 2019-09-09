@@ -5,7 +5,7 @@
     <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Reimpresión de Comprobantes</h1>
-                </div>
+                </div> 
                 <!-- /.col-lg-12 -->
     </div>
   

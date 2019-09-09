@@ -74,9 +74,7 @@ function validacioncuentasegreso()
 
             }
         });
-    });
-
-    
+    });   
 
 }
 function validacioncuentasingreso(){
